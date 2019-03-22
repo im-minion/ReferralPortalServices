@@ -2,22 +2,22 @@ package com.vaibhav.minion.referralportal.model;
 
 public class InsertJobResponse {
 
-    private String jobId;
+    private String _id;
     private boolean isInserted;
     private String message;
 
-    public InsertJobResponse(String jobId, boolean isInserted, String message) {
-        this.jobId = jobId;
+    public InsertJobResponse(String _id, boolean isInserted, String message) {
+        this._id = _id;
         this.isInserted = isInserted;
         this.message = message;
     }
 
     public String getJobId() {
-        return jobId;
+        return _id;
     }
 
     public void setJobId(String jobId) {
-        this.jobId = jobId;
+        this._id = jobId;
     }
 
     public boolean isInserted() {

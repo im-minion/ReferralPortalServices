@@ -1,19 +1,11 @@
 package com.vaibhav.minion.referralportal.model;
 
 public class InsertJobRequest {
-    private String jobId;
     private String jobTitle;
     private String jobDescription;
     private String yoe;
     private String prefLocation;
-
-    public String getJobId() {
-        return jobId;
-    }
-
-    public void setJobId(String jobId) {
-        this.jobId = jobId;
-    }
+    private String createdByEmployeeId;
 
     public String getJobTitle() {
         return jobTitle;
@@ -45,5 +37,13 @@ public class InsertJobRequest {
 
     public void setPrefLocation(String prefLocation) {
         this.prefLocation = prefLocation;
+    }
+
+    public String getCreatedByEmployeeId() {
+        return createdByEmployeeId;
+    }
+
+    public void setCreatedByEmployeeId(String createdByEmployeeId) {
+        this.createdByEmployeeId = createdByEmployeeId;
     }
 }

@@ -29,6 +29,8 @@ public class HMRepository implements HMDao {
             jobs.setJobTitle(insertJobRequest.getJobTitle());
             jobs.setYeo(insertJobRequest.getYoe());
             jobs.setCreatedByEmployeeId(insertJobRequest.getCreatedByEmployeeId());
+            jobs.setPrimarySkill(insertJobRequest.getPrimarySkill());
+            jobs.setSecondarySkill(insertJobRequest.getSecondarySkill());
             mongoTemplate.insert(jobs, OPEN_JOBS_COLLECTION);
             insertJobResponse = new InsertJobResponse(jobs.getId(), true, "success");
             return insertJobResponse;
@@ -40,8 +42,11 @@ public class HMRepository implements HMDao {
 
     @Override
     public List<JOBS> getAllOpenJobs(String employeeId) {
-        Criteria criteria = new Criteria("createdByEmployeeId").is(employeeId);
-        Query query = new Query().addCriteria(criteria);
+        Criteria criteriaEmployeeId = new Criteria("createdByEmployeeId").is(employeeId);
+        Criteria criteriaJobVisibility = new Criteria("jobVisibility").is(true);
+        Criteria criteriaJobStatus= new Criteria("jobStatus").is("OPEN");
+        Query query = new Query();
+        query.addCriteria(criteriaEmployeeId).addCriteria(criteriaJobVisibility).addCriteria(criteriaJobStatus);
         return mongoTemplate.find(query, JOBS.class);
     }
 }

@@ -3,8 +3,6 @@ package com.vaibhav.minion.referralportal.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
-
 @Document("JOBS")
 public class JOBS {
     @Id
@@ -14,7 +12,10 @@ public class JOBS {
     private String yeo;
     private String createdByEmployeeId;
     private String prefLocation;
-    private List<JobStatus> jobstatusList;
+    private boolean jobVisibility = false;
+    private String jobStatus = "DEFAULT";
+    private String primarySkill;
+    private String secondarySkill;
 
     public String getId() {
         return id;
@@ -60,11 +61,35 @@ public class JOBS {
         this.prefLocation = prefLocation;
     }
 
-    public List<JobStatus> getJobstatusList() {
-        return jobstatusList;
+    public boolean isJobVisibility() {
+        return jobVisibility;
     }
 
-    public void setJobstatusList(List<JobStatus> jobstatusList) {
-        this.jobstatusList = jobstatusList;
+    public void setJobVisibility(boolean jobVisibility) {
+        this.jobVisibility = jobVisibility;
+    }
+
+    public String getJobStatus() {
+        return jobStatus;
+    }
+
+    public void setJobStatus(String jobStatus) {
+        this.jobStatus = jobStatus;
+    }
+
+    public String getPrimarySkill() {
+        return primarySkill;
+    }
+
+    public void setPrimarySkill(String primarySkill) {
+        this.primarySkill = primarySkill;
+    }
+
+    public String getSecondarySkill() {
+        return secondarySkill;
+    }
+
+    public void setSecondarySkill(String secondarySkill) {
+        this.secondarySkill = secondarySkill;
     }
 }

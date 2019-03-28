@@ -6,6 +6,8 @@ public class InsertJobRequest {
     private String yoe;
     private String prefLocation;
     private String createdByEmployeeId;
+    private String primarySkill;
+    private String secondarySkill;
 
     public String getJobTitle() {
         return jobTitle;
@@ -45,5 +47,21 @@ public class InsertJobRequest {
 
     public void setCreatedByEmployeeId(String createdByEmployeeId) {
         this.createdByEmployeeId = createdByEmployeeId;
+    }
+
+    public String getPrimarySkill() {
+        return primarySkill;
+    }
+
+    public void setPrimarySkill(String primarySkill) {
+        this.primarySkill = primarySkill;
+    }
+
+    public String getSecondarySkill() {
+        return secondarySkill;
+    }
+
+    public void setSecondarySkill(String secondarySkill) {
+        this.secondarySkill = secondarySkill;
     }
 }

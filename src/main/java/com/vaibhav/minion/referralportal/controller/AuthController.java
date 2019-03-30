@@ -1,0 +1,27 @@
+package com.vaibhav.minion.referralportal.controller;
+
+import com.vaibhav.minion.referralportal.model.auth.LoginRequest;
+import com.vaibhav.minion.referralportal.model.auth.LoginResponse;
+import com.vaibhav.minion.referralportal.model.auth.RegisterReposne;
+import com.vaibhav.minion.referralportal.model.auth.RegisterRequest;
+import com.vaibhav.minion.referralportal.service.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping(path = "/rp/auth")
+public class AuthController {
+    @Autowired
+    private AuthService authService;
+
+    @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
+    public LoginResponse loginUser(@RequestBody LoginRequest loginRequest){
+        return authService.loginUser(loginRequest);
+    }
+
+    @PostMapping(value = "/register", consumes = "application/json", produces = "application/json")
+    public RegisterReposne RegisterUser(@RequestBody RegisterRequest registerRequest){
+        return authService.registerUser(registerRequest);
+    }
+
+}

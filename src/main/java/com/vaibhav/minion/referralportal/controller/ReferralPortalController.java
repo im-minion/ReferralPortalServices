@@ -3,6 +3,7 @@ package com.vaibhav.minion.referralportal.controller;
 import com.vaibhav.minion.referralportal.model.InsertJobRequest;
 import com.vaibhav.minion.referralportal.model.InsertJobResponse;
 import com.vaibhav.minion.referralportal.model.JOBS;
+import com.vaibhav.minion.referralportal.service.EmployeeService;
 import com.vaibhav.minion.referralportal.service.HMService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,9 @@ public class ReferralPortalController {
     @Autowired
     private HMService hmService;
 
+    @Autowired
+    private EmployeeService employeeService;
+
     @PostMapping(value = "/hm/insertJob", consumes = "application/json", produces = "application/json")
     public ResponseEntity<InsertJobResponse> insertJob(@RequestBody InsertJobRequest insertJobRequest) {
         InsertJobResponse insertJobResponse = hmService.insertJob(insertJobRequest);
@@ -28,4 +32,6 @@ public class ReferralPortalController {
         List<JOBS> openJobsList = hmService.getOpenJobs(employeeId);
         return ResponseEntity.ok().body(openJobsList);
     }
+
+
 }

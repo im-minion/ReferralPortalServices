@@ -21,7 +21,7 @@ public class HMService {
     }
 
     public List<JOBS> getOpenJobs(String employeeId) {
-        List<JOBS> jobsList = hmDao.getAllOpenJobs(employeeId);
+        List<JOBS> jobsList = hmDao.getAllJobsForHm(employeeId);
         return jobsList;
     }
 }

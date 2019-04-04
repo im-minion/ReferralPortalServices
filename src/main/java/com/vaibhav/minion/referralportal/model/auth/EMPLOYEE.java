@@ -10,6 +10,7 @@ public class EMPLOYEE {
     private String employeeId;
     private String employeeRole;
     private String encryptedPassword;
+//    TODO : EMPLOYEE NAME
 
     public String getId() {
         return id;

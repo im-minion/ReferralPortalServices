@@ -41,7 +41,7 @@ public class HMRepository implements HMDao {
     }
 
     @Override
-    public List<JOBS> getAllOpenJobs(String employeeId) {
+    public List<JOBS> getAllJobsForHm(String employeeId) {
         Criteria criteriaEmployeeId = new Criteria("createdByEmployeeId").is(employeeId);
         Criteria criteriaJobVisibility = new Criteria("jobVisibility").is(true);
         Criteria criteriaJobStatus= new Criteria("jobStatus").is("OPEN");

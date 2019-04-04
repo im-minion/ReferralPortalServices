@@ -10,5 +10,5 @@ public interface HMDao {
 
     public InsertJobResponse insertJob(InsertJobRequest insertJobRequest);
 
-    public List<JOBS> getAllOpenJobs(String employeeId);
+    public List<JOBS> getAllJobsForHm(String employeeId);
 }

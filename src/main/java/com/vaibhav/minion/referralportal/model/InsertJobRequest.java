@@ -1,5 +1,7 @@
 package com.vaibhav.minion.referralportal.model;
 
+
+
 public class InsertJobRequest {
     private String jobTitle;
     private String jobDescription;

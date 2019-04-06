@@ -1,5 +1,6 @@
 package com.vaibhav.minion.referralportal.model;
 
+
 public class InsertJobResponse {
 
     private String _id;

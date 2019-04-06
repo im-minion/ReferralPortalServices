@@ -1,8 +1,7 @@
 package com.vaibhav.minion.referralportal.controller;
 
-import com.vaibhav.minion.referralportal.model.InsertJobRequest;
-import com.vaibhav.minion.referralportal.model.InsertJobResponse;
-import com.vaibhav.minion.referralportal.model.JOBS;
+import com.vaibhav.minion.referralportal.model.*;
+import com.vaibhav.minion.referralportal.model.auth.EMPLOYEE;
 import com.vaibhav.minion.referralportal.service.EmployeeService;
 import com.vaibhav.minion.referralportal.service.HMService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +32,22 @@ public class ReferralPortalController {
         return ResponseEntity.ok().body(openJobsList);
     }
 
+    @GetMapping(value = "/employee/getOpenJob", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<List<JOBS>> getOpenAllJobs() {
+        List<JOBS> openJobsList = employeeService.getAllOpenJobs();
+        return ResponseEntity.ok().body(openJobsList);
+    }
+
+    @PostMapping(value = "/employee/addReferral", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<AddReferralResponse> addReferal(@RequestBody AddReferralRequest addReferralRequest) {
+        AddReferralResponse referralResponse = employeeService.addReferral(addReferralRequest);
+        return ResponseEntity.ok().body(referralResponse);
+    }
+
+    @GetMapping(value = "/employee/getReferralsByEmployeeId", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<List<REFERRALS>> getReferrals(@RequestParam("employeeId") String employeeId) {
+        List<REFERRALS> employeeList = employeeService.getReferralsOfEmployeeId(employeeId);
+        return ResponseEntity.ok().body(employeeList);
+    }
 
 }

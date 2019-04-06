@@ -44,7 +44,7 @@ public class HMRepository implements HMDao {
     public List<JOBS> getAllJobsForHm(String employeeId) {
         Criteria criteriaEmployeeId = new Criteria("createdByEmployeeId").is(employeeId);
         Criteria criteriaJobVisibility = new Criteria("jobVisibility").is(true);
-        Criteria criteriaJobStatus= new Criteria("jobStatus").is("OPEN");
+        Criteria criteriaJobStatus = new Criteria("jobStatus").is("OPEN");
         Query query = new Query();
         query.addCriteria(criteriaEmployeeId).addCriteria(criteriaJobVisibility).addCriteria(criteriaJobStatus);
         return mongoTemplate.find(query, JOBS.class);

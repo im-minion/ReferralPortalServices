@@ -16,17 +16,17 @@ public class EmployeeService {
     @Autowired
     private EmployeeDao employeeDao;
 
-    public AddReferralResponse addReferral(AddReferralRequest addReferralRequest){
+    public AddReferralResponse addReferral(AddReferralRequest addReferralRequest) {
         AddReferralResponse addReferralResponse = employeeDao.addReferral(addReferralRequest);
         return addReferralResponse;
     }
 
-    public List<REFERRALS> getReferralsOfEmployeeId(String employeeId){
+    public List<REFERRALS> getReferralsOfEmployeeId(String employeeId) {
         List<REFERRALS> referralsList = employeeDao.getReferralsOfEmployeeId(employeeId);
         return referralsList;
     }
 
-    public List<JOBS> getAllOpenJobs(){
+    public List<JOBS> getAllOpenJobs() {
         List<JOBS> jobsList = employeeDao.getAllOpenJobs();
         return jobsList;
     }

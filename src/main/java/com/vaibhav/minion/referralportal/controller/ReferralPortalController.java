@@ -1,7 +1,6 @@
 package com.vaibhav.minion.referralportal.controller;
 
 import com.vaibhav.minion.referralportal.model.*;
-import com.vaibhav.minion.referralportal.model.auth.EMPLOYEE;
 import com.vaibhav.minion.referralportal.service.EmployeeService;
 import com.vaibhav.minion.referralportal.service.HMService;
 import org.springframework.beans.factory.annotation.Autowired;

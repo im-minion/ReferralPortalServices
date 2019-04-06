@@ -6,7 +6,10 @@ import com.vaibhav.minion.referralportal.model.auth.RegisterReposne;
 import com.vaibhav.minion.referralportal.model.auth.RegisterRequest;
 import com.vaibhav.minion.referralportal.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "/rp/auth")
@@ -15,12 +18,12 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
-    public LoginResponse loginUser(@RequestBody LoginRequest loginRequest){
+    public LoginResponse loginUser(@RequestBody LoginRequest loginRequest) {
         return authService.loginUser(loginRequest);
     }
 
     @PostMapping(value = "/register", consumes = "application/json", produces = "application/json")
-    public RegisterReposne RegisterUser(@RequestBody RegisterRequest registerRequest){
+    public RegisterReposne RegisterUser(@RequestBody RegisterRequest registerRequest) {
         return authService.registerUser(registerRequest);
     }
 

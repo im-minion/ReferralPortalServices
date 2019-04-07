@@ -21,21 +21,23 @@ public class EmployeeRepository implements EmployeeDao {
 
     private static final String REFERRALS_COLLECTION = "REFERRALS";
 
+    private static final String JOBS_COLLECTION = "JOBS";
+
     @Override
     public List<JOBS> getAllOpenJobs() {
         Criteria criteriaJobVisibility = new Criteria("jobVisibility").is(true);
         Criteria criteriaJobStatus = new Criteria("jobStatus").is("OPEN");
         Query query = new Query();
         query.addCriteria(criteriaJobVisibility).addCriteria(criteriaJobStatus);
-        return mongoTemplate.find(query, JOBS.class);
+        return mongoTemplate.find(query, JOBS.class, JOBS_COLLECTION);
     }
 
     @Override
     public List<REFERRALS> getReferralsOfEmployeeId(String employeeId) {
-        Criteria referredByCriteria = new Criteria("referredBy").is(employeeId);
         Query query = new Query();
+        Criteria referredByCriteria = new Criteria("referredBy").is(employeeId);
         query.addCriteria(referredByCriteria);
-        return mongoTemplate.find(query, REFERRALS.class);
+        return mongoTemplate.find(query, REFERRALS.class, REFERRALS_COLLECTION);
     }
 
     @Override

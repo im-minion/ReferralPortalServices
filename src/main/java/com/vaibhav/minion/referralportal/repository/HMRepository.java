@@ -47,6 +47,6 @@ public class HMRepository implements HMDao {
         Criteria criteriaJobStatus = new Criteria("jobStatus").is("OPEN");
         Query query = new Query();
         query.addCriteria(criteriaEmployeeId).addCriteria(criteriaJobVisibility).addCriteria(criteriaJobStatus);
-        return mongoTemplate.find(query, JOBS.class);
+        return mongoTemplate.find(query, JOBS.class, OPEN_JOBS_COLLECTION);
     }
 }

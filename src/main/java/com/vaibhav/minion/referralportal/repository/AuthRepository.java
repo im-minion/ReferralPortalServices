@@ -26,7 +26,7 @@ public class AuthRepository implements AuthDao {
         Query query = new Query();
         query.addCriteria(loginEmployeeIdCriteria).addCriteria(loginPasswordCriteria);
 
-        List<EMPLOYEE> employee = mongoTemplate.find(query, EMPLOYEE.class);
+        List<EMPLOYEE> employee = mongoTemplate.find(query, EMPLOYEE.class, EMPLOYEE_COLLECTION);
         if (employee.size() == 1) {
             loginResponse.setMessage("SUCCESS");
             loginResponse.setEmployeeId(employee.get(0).getEmployeeId());
@@ -66,7 +66,7 @@ public class AuthRepository implements AuthDao {
         Criteria registerEmployeeIdCriteria = new Criteria("employeeId").is(employeeId);
         Query query = new Query();
         query.addCriteria(registerEmployeeIdCriteria);
-        List<EMPLOYEE> employee = mongoTemplate.find(query, EMPLOYEE.class);
+        List<EMPLOYEE> employee = mongoTemplate.find(query, EMPLOYEE.class, EMPLOYEE_COLLECTION);
         return employee.size() > 0;
     }
 }

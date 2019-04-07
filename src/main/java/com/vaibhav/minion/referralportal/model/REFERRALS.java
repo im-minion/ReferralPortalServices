@@ -8,24 +8,24 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class REFERRALS {
 
     @Id
-    private String referralId;
+    private String id;
     private String referralName;
-    private String JobId;
+    private String jobId;
     private String referDate;
     private String panNumber;
     private String dob;
     private String yoe;
     private String primarySkill;
     private String secondarySkill;
-    private String referralStatus="RESUME_SCREENING";
+    private String referralStatus = "RESUME_SCREENING";
     private String referredBy;
 
     public String getReferralId() {
-        return referralId;
+        return id;
     }
 
     public void setReferralId(String referralId) {
-        this.referralId = referralId;
+        this.id = referralId;
     }
 
     public String getReferralName() {
@@ -37,11 +37,11 @@ public class REFERRALS {
     }
 
     public String getJobId() {
-        return JobId;
+        return jobId;
     }
 
     public void setJobId(String jobId) {
-        JobId = jobId;
+        this.jobId = jobId;
     }
 
     public String getReferDate() {

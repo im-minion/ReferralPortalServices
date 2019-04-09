@@ -19,6 +19,8 @@ public class ReferralPortalController {
     @Autowired
     private EmployeeService employeeService;
 
+    /*********************************************_HM_***********************************************************/
+
     @PostMapping(value = "/hm/insertJob", consumes = "application/json", produces = "application/json")
     public ResponseEntity<InsertJobResponse> insertJob(@RequestBody InsertJobRequest insertJobRequest) {
         InsertJobResponse insertJobResponse = hmService.insertJob(insertJobRequest);
@@ -30,6 +32,19 @@ public class ReferralPortalController {
         List<JOBS> openJobsList = hmService.getOpenJobs(employeeId);
         return ResponseEntity.ok().body(openJobsList);
     }
+
+    @GetMapping(value = "/hm/getReferrals", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<List<REFERRALS>> getReferrals(@RequestParam("jobId") Double jobId) {
+        List<REFERRALS> referralsList = hmService.getReferralsFromJobId(jobId);
+        return ResponseEntity.ok().body(referralsList);
+    }
+
+//    @PostMapping(value = "/hm/updateJobStatus", consumes = "application/json", produces = "application/json")
+
+
+//    TODO: 1.UPDATE JOB STATUS 2.UPDATE REFERRAL STATUS 3.REASON WHILE UPDATING
+
+    /*********************************************_EMPLOYEE_***********************************************************/
 
     @GetMapping(value = "/employee/getOpenJob", consumes = "application/json", produces = "application/json")
     public ResponseEntity<List<JOBS>> getOpenAllJobs() {
@@ -48,5 +63,9 @@ public class ReferralPortalController {
         List<REFERRALS> employeeList = employeeService.getReferralsOfEmployeeId(employeeId);
         return ResponseEntity.ok().body(employeeList);
     }
+
+    /*********************************************_HR_***********************************************************/
+
+    /*********************************************_ADMIN_***********************************************************/
 
 }

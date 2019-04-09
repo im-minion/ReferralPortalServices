@@ -3,6 +3,8 @@ package com.vaibhav.minion.referralportal.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 
 @Document("REFERRAL")
 public class REFERRALS {
@@ -10,7 +12,7 @@ public class REFERRALS {
     @Id
     private String id;
     private String referralName;
-    private String jobId;
+    private Double jobId;
     private String referDate;
     private String panNumber;
     private String dob;
@@ -19,6 +21,7 @@ public class REFERRALS {
     private String secondarySkill;
     private String referralStatus = "RESUME_SCREENING";
     private String referredBy;
+    private List<ReferralStatusReasons> referralStatusReasonsList;
 
     public String getReferralId() {
         return id;
@@ -36,11 +39,11 @@ public class REFERRALS {
         this.referralName = referralName;
     }
 
-    public String getJobId() {
+    public Double getJobId() {
         return jobId;
     }
 
-    public void setJobId(String jobId) {
+    public void setJobId(Double jobId) {
         this.jobId = jobId;
     }
 
@@ -106,5 +109,13 @@ public class REFERRALS {
 
     public void setReferredBy(String referredBy) {
         this.referredBy = referredBy;
+    }
+
+    public List<ReferralStatusReasons> getReferralStatusReasonsList() {
+        return referralStatusReasonsList;
+    }
+
+    public void setReferralStatusReasonsList(List<ReferralStatusReasons> referralStatusReasonsList) {
+        this.referralStatusReasonsList = referralStatusReasonsList;
     }
 }

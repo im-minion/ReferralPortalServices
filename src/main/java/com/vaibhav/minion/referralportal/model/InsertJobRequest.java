@@ -3,6 +3,7 @@ package com.vaibhav.minion.referralportal.model;
 
 
 public class InsertJobRequest {
+    private long jobId;
     private String jobTitle;
     private String jobDescription;
     private String yoe;
@@ -10,6 +11,14 @@ public class InsertJobRequest {
     private String createdByEmployeeId;
     private String primarySkill;
     private String secondarySkill;
+
+    public long getJobId() {
+        return jobId;
+    }
+
+    public void setJobId(long jobId) {
+        this.jobId = jobId;
+    }
 
     public String getJobTitle() {
         return jobTitle;

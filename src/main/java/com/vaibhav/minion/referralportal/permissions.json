@@ -1,0 +1,16 @@
+{
+  "EMPLOYEE": [
+    "/employee/*"
+  ],
+  "HM": [
+    "/employee/*",
+    "/hm/*"
+  ],
+  "HR": [
+    "/employee/*",
+    "/hr/*"
+  ],
+  "ADMIN": [
+    "/admin/*"
+  ]
+}

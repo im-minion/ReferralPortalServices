@@ -1,14 +1,13 @@
 package com.vaibhav.minion.referralportal.repository;
 
+import com.mongodb.client.result.UpdateResult;
 import com.vaibhav.minion.referralportal.dao.HMDao;
-import com.vaibhav.minion.referralportal.model.InsertJobRequest;
-import com.vaibhav.minion.referralportal.model.InsertJobResponse;
-import com.vaibhav.minion.referralportal.model.JOBS;
-import com.vaibhav.minion.referralportal.model.REFERRALS;
+import com.vaibhav.minion.referralportal.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -53,7 +52,7 @@ public class HMRepository implements HMDao {
         Query query = new Query();
         query.addCriteria(insertJobCriteria);
         JOBS job = mongoTemplate.findOne(query, JOBS.class, OPEN_JOBS_COLLECTION);
-        return job!=null;
+        return job != null;
     }
 
     @Override
@@ -72,6 +71,22 @@ public class HMRepository implements HMDao {
         Query query = new Query();
         query.addCriteria(jobIdCriteria);
         return mongoTemplate.find(query, REFERRALS.class, REFERRALS_COLLECTION);
+    }
+
+    @Override
+    public UpdateJobStatusResponse updateJobStatus(UpdateJobStatusRequest updateJobStatusRequest) {
+        UpdateJobStatusResponse updateJobStatusResponse;
+        try {
+            Update update = new Update();
+            update.set("jobStatus", updateJobStatusRequest.getNewJobStatus());
+            Criteria jobIdCriteria = new Criteria("jobId").is(updateJobStatusRequest.getJobId());
+            Query query = new Query();
+            query.addCriteria(jobIdCriteria);
+            mongoTemplate.updateFirst(query, update, JOBS.class, OPEN_JOBS_COLLECTION);
+            return new UpdateJobStatusResponse("Successfully updated!", updateJobStatusRequest.getNewJobStatus());
+        } catch (Exception e) {
+            return new UpdateJobStatusResponse("Failed to update", "DEFAULT");
+        }
     }
 
 }

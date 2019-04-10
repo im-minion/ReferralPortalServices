@@ -1,10 +1,7 @@
 package com.vaibhav.minion.referralportal.service;
 
 import com.vaibhav.minion.referralportal.dao.HMDao;
-import com.vaibhav.minion.referralportal.model.InsertJobRequest;
-import com.vaibhav.minion.referralportal.model.InsertJobResponse;
-import com.vaibhav.minion.referralportal.model.JOBS;
-import com.vaibhav.minion.referralportal.model.REFERRALS;
+import com.vaibhav.minion.referralportal.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +26,9 @@ public class HMService {
     public List<REFERRALS> getReferralsFromJobId(Double jobId) {
         List<REFERRALS> referralsList = hmDao.getReferralsFromJobId(jobId);
         return referralsList;
+    }
+
+    public UpdateJobStatusResponse updateJobStatus(UpdateJobStatusRequest updateJobStatusRequest){
+        return hmDao.updateJobStatus(updateJobStatusRequest);
     }
 }

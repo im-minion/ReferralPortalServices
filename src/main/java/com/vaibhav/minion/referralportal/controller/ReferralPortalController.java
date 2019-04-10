@@ -39,10 +39,13 @@ public class ReferralPortalController {
         return ResponseEntity.ok().body(referralsList);
     }
 
-//    @PostMapping(value = "/hm/updateJobStatus", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/hm/updateJobStatus", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<UpdateJobStatusResponse> updateJobStatus(@RequestBody UpdateJobStatusRequest updateJobStatusRequest) {
+        UpdateJobStatusResponse updateJobStatusResponse = hmService.updateJobStatus(updateJobStatusRequest);
+        return ResponseEntity.ok().body(updateJobStatusResponse);
+    }
 
-
-//    TODO: 1.UPDATE JOB STATUS 2.UPDATE REFERRAL STATUS 3.REASON WHILE UPDATING
+//    TODO: 1.UPDATE REFERRAL STATUS 2.REASON WHILE UPDATING
 
     /*********************************************_EMPLOYEE_***********************************************************/
 

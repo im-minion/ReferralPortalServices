@@ -1,9 +1,6 @@
 package com.vaibhav.minion.referralportal.dao;
 
-import com.vaibhav.minion.referralportal.model.InsertJobRequest;
-import com.vaibhav.minion.referralportal.model.InsertJobResponse;
-import com.vaibhav.minion.referralportal.model.JOBS;
-import com.vaibhav.minion.referralportal.model.REFERRALS;
+import com.vaibhav.minion.referralportal.model.*;
 
 import java.util.List;
 
@@ -14,4 +11,6 @@ public interface HMDao {
     public List<JOBS> getAllJobsForHm(String employeeId);
 
     public List<REFERRALS> getReferralsFromJobId(Double jobId);
+
+    public UpdateJobStatusResponse updateJobStatus(UpdateJobStatusRequest updateJobStatusRequest);
 }

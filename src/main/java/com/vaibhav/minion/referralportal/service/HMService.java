@@ -31,4 +31,8 @@ public class HMService {
     public UpdateJobStatusResponse updateJobStatus(UpdateJobStatusRequest updateJobStatusRequest){
         return hmDao.updateJobStatus(updateJobStatusRequest);
     }
+
+    public UpdateReferralStatusResponse updateReferralStatus(UpdateReferralStatusRequest updateReferralStatusRequest){
+        return hmDao.updateReferralStatus(updateReferralStatusRequest);
+    }
 }

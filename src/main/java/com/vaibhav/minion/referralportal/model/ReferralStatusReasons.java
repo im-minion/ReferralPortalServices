@@ -1,31 +1,32 @@
 package com.vaibhav.minion.referralportal.model;
 
 public class ReferralStatusReasons {
-    private String previousStatus;
-    private String reasonToPromote;
-    private String nextStatus;
+    private String level;
+    private String status;
+    private String reasonToUpdate;
 
-    public String getPreviousStatus() {
-        return previousStatus;
+    public String getLevel() {
+        return level;
     }
 
-    public void setPreviousStatus(String previousStatus) {
-        this.previousStatus = previousStatus;
+    public void setLevel(String level) {
+        this.level = level;
     }
 
-    public String getReasonToPromote() {
-        return reasonToPromote;
+    public String getStatus() {
+        return status;
     }
 
-    public void setReasonToPromote(String reasonToPromote) {
-        this.reasonToPromote = reasonToPromote;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getNextStatus() {
-        return nextStatus;
+    public String getReasonToUpdate() {
+        return reasonToUpdate;
     }
 
-    public void setNextStatus(String nextStatus) {
-        this.nextStatus = nextStatus;
+    public void setReasonToUpdate(String reasonToUpdate) {
+        this.reasonToUpdate = reasonToUpdate;
     }
+
 }

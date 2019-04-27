@@ -13,4 +13,6 @@ public interface HMDao {
     public List<REFERRALS> getReferralsFromJobId(Double jobId);
 
     public UpdateJobStatusResponse updateJobStatus(UpdateJobStatusRequest updateJobStatusRequest);
+
+    public UpdateReferralStatusResponse updateReferralStatus(UpdateReferralStatusRequest updateReferralStatusRequest);
 }

@@ -11,6 +11,7 @@ public class REFERRALS {
 
     @Id
     private String id;
+    private String referralEmailId;
     private String referralName;
     private Double jobId;
     private String referDate;
@@ -19,12 +20,22 @@ public class REFERRALS {
     private String yoe;
     private String primarySkill;
     private String secondarySkill;
-    private String referralStatus = "RESUME_SCREENING";
+    private String referralCurrentLevel = "RESUME_SCREENING";
+    private String referralCurrentStatus = "PENDING";
+//    will be pending by default but once referral processed it will be  ACCEPTED or REJECTED
     private String referredBy;
     private List<ReferralStatusReasons> referralStatusReasonsList;
 
     public String getReferralId() {
         return id;
+    }
+
+    public String getReferralEmailId() {
+        return referralEmailId;
+    }
+
+    public void setReferralEmailId(String referralEmailId) {
+        this.referralEmailId = referralEmailId;
     }
 
     public void setReferralId(String referralId) {
@@ -95,12 +106,20 @@ public class REFERRALS {
         this.secondarySkill = secondarySkill;
     }
 
-    public String getReferralStatus() {
-        return referralStatus;
+    public String getReferralCurrentLevel() {
+        return referralCurrentLevel;
     }
 
-    public void setReferralStatus(String referralStatus) {
-        this.referralStatus = referralStatus;
+    public void setReferralCurrentLevel(String referralCurrentLevel) {
+        this.referralCurrentLevel = referralCurrentLevel;
+    }
+
+    public String getReferralCurrentStatus() {
+        return referralCurrentStatus;
+    }
+
+    public void setReferralCurrentStatus(String referralCurrentStatus) {
+        this.referralCurrentStatus = referralCurrentStatus;
     }
 
     public String getReferredBy() {

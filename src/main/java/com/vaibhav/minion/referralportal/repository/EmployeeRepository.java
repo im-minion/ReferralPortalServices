@@ -45,21 +45,34 @@ public class EmployeeRepository implements EmployeeDao {
         AddReferralResponse addReferralResponse;
         try {
             REFERRALS referrals = new REFERRALS();
-            referrals.setDob(addReferralRequest.getDob());
-            referrals.setJobId(addReferralRequest.getJobId());
-            referrals.setPanNumber(addReferralRequest.getPanNumber());
-            referrals.setReferDate(addReferralRequest.getReferDate());
-            referrals.setReferralName(addReferralRequest.getReferralName());
-            referrals.setPrimarySkill(addReferralRequest.getPrimarySkill());
-            referrals.setSecondarySkill(addReferralRequest.getSecondarySkill());
-            referrals.setReferredBy(addReferralRequest.getReferredBy());
+            if(!isReferralEmailIdExists(addReferralRequest.getReferralEmailId())) {
+                referrals.setReferralEmailId(addReferralRequest.getReferralEmailId());
+                referrals.setDob(addReferralRequest.getDob());
+                referrals.setJobId(addReferralRequest.getJobId());
+                referrals.setPanNumber(addReferralRequest.getPanNumber());
+                referrals.setReferDate(addReferralRequest.getReferDate());
+                referrals.setReferralName(addReferralRequest.getReferralName());
+                referrals.setPrimarySkill(addReferralRequest.getPrimarySkill());
+                referrals.setSecondarySkill(addReferralRequest.getSecondarySkill());
+                referrals.setReferredBy(addReferralRequest.getReferredBy());
 
-            mongoTemplate.insert(referrals, REFERRALS_COLLECTION);
-            addReferralResponse = new AddReferralResponse("", true, "");
+                mongoTemplate.insert(referrals, REFERRALS_COLLECTION);
+                addReferralResponse = new AddReferralResponse("", true, "");
+            }else {
+                addReferralResponse = new AddReferralResponse("", false, "Referral Email Id already Exists can't refer!");
+            }
             return addReferralResponse;
         } catch (Exception e) {
             addReferralResponse = new AddReferralResponse("", false, "");
         }
         return addReferralResponse;
+    }
+
+    private boolean isReferralEmailIdExists(String referralEmailId) {
+        Criteria emailIdCriteria = new Criteria("referralEmailId").is(referralEmailId);
+        Query query = new Query();
+        query.addCriteria(emailIdCriteria);
+        REFERRALS referral = mongoTemplate.findOne(query,REFERRALS.class,REFERRALS_COLLECTION);
+        return referral != null;
     }
 }

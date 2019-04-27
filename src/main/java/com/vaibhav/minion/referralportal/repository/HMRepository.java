@@ -89,4 +89,65 @@ public class HMRepository implements HMDao {
         }
     }
 
+    @Override
+    public UpdateReferralStatusResponse updateReferralStatus(UpdateReferralStatusRequest updateReferralStatusRequest) {
+        UpdateReferralStatusResponse updateReferralStatusResponse;
+        try {
+
+            ReferralStatusReasons referralStatusReasons = new ReferralStatusReasons();
+            referralStatusReasons.setLevel(updateReferralStatusRequest.getCurrentLevel());
+            referralStatusReasons.setStatus(updateReferralStatusRequest.getStatus()); //either ACCEPTED or REJECTED
+            referralStatusReasons.setReasonToUpdate(updateReferralStatusRequest.getReason());
+
+            LevelStatus levelStatus = getNextLevelStatus(updateReferralStatusRequest.getCurrentLevel(), updateReferralStatusRequest.getStatus());
+            Update update = new Update();
+            update.set("referralCurrentLevel", levelStatus.getNextLevel());
+            update.set("referralCurrentStatus", levelStatus.getNextStatus());
+            update.addToSet("referralStatusReasonsList", referralStatusReasons);
+
+            Query query = new Query();
+            Criteria referralEmailIdCriteria = new Criteria("referralEmailId").is(updateReferralStatusRequest.getReferralEmailId());
+            query.addCriteria(referralEmailIdCriteria);
+
+            mongoTemplate.updateFirst(query, update, REFERRALS.class, REFERRALS_COLLECTION);
+
+            return new UpdateReferralStatusResponse(levelStatus.getNextLevel(), "SUCCESS", true);
+        } catch (Exception e) {
+            return new UpdateReferralStatusResponse("", "FAILURE", false);
+        }
+
+    }
+
+
+    private LevelStatus getNextLevelStatus(String currentLevel, String status) {
+        LevelStatus levelStatus = new LevelStatus();
+        String nextLevel = null;
+        String nextStatus = "PENDING";
+        if (status.equals("ACCEPTED")) {
+            switch (currentLevel) {
+                case "RESUME_SCREENING":
+                    nextLevel = "L1";
+                    break;
+                case "L1":
+                    nextLevel = "L2";
+                    break;
+                case "L2":
+                    nextLevel = "HR";
+                    break;
+                case "HR":
+                    nextLevel = "HR";
+                    nextStatus = "ACCEPTED";
+                    break;
+                default:
+                    break;
+            }
+        } else if (status.equals("REJECTED")) {
+            nextLevel = currentLevel;
+            nextStatus = "REJECTED";
+        }
+        levelStatus.setNextLevel(nextLevel);
+        levelStatus.setNextStatus(nextStatus);
+        return levelStatus;
+    }
+
 }

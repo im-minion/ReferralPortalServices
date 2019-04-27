@@ -1,6 +1,7 @@
 package com.vaibhav.minion.referralportal.model;
 
 public class AddReferralRequest {
+    private String referralEmailId;
     private String referralName;
     private Double jobId;
     private String referDate;
@@ -10,6 +11,14 @@ public class AddReferralRequest {
     private String primarySkill;
     private String secondarySkill;
     private String referredBy;
+
+    public String getReferralEmailId() {
+        return referralEmailId;
+    }
+
+    public void setReferralEmailId(String referralEmailId) {
+        this.referralEmailId = referralEmailId;
+    }
 
     public String getReferralName() {
         return referralName;

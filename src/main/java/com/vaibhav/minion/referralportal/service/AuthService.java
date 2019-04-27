@@ -1,10 +1,10 @@
 package com.vaibhav.minion.referralportal.service;
 
 import com.vaibhav.minion.referralportal.dao.AuthDao;
-import com.vaibhav.minion.referralportal.model.auth.LoginRequest;
-import com.vaibhav.minion.referralportal.model.auth.LoginResponse;
-import com.vaibhav.minion.referralportal.model.auth.RegisterReposne;
-import com.vaibhav.minion.referralportal.model.auth.RegisterRequest;
+import com.vaibhav.minion.referralportal.utility.LoginRequest;
+import com.vaibhav.minion.referralportal.utility.LoginResponse;
+import com.vaibhav.minion.referralportal.utility.RegisterReposne;
+import com.vaibhav.minion.referralportal.utility.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,11 @@
 package com.vaibhav.minion.referralportal.repository;
 
 import com.vaibhav.minion.referralportal.dao.AuthDao;
-import com.vaibhav.minion.referralportal.model.auth.*;
+import com.vaibhav.minion.referralportal.model.EMPLOYEE;
+import com.vaibhav.minion.referralportal.utility.LoginRequest;
+import com.vaibhav.minion.referralportal.utility.LoginResponse;
+import com.vaibhav.minion.referralportal.utility.RegisterReposne;
+import com.vaibhav.minion.referralportal.utility.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;

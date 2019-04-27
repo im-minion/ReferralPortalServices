@@ -1,4 +1,4 @@
-package com.vaibhav.minion.referralportal.model.auth;
+package com.vaibhav.minion.referralportal.utility;
 
 public class LoginRequest {
     private String employeeId;

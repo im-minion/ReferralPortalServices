@@ -1,7 +1,7 @@
 package com.vaibhav.minion.referralportal.dao;
 
-import com.vaibhav.minion.referralportal.model.AddReferralResponse;
-import com.vaibhav.minion.referralportal.model.AddReferralRequest;
+import com.vaibhav.minion.referralportal.utility.AddReferralResponse;
+import com.vaibhav.minion.referralportal.utility.AddReferralRequest;
 import com.vaibhav.minion.referralportal.model.JOBS;
 import com.vaibhav.minion.referralportal.model.REFERRALS;
 

@@ -1,5 +1,6 @@
 package com.vaibhav.minion.referralportal.model;
 
+import com.vaibhav.minion.referralportal.utility.ReferralStatusReasons;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

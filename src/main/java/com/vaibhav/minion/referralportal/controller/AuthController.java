@@ -1,9 +1,9 @@
 package com.vaibhav.minion.referralportal.controller;
 
-import com.vaibhav.minion.referralportal.model.auth.LoginRequest;
-import com.vaibhav.minion.referralportal.model.auth.LoginResponse;
-import com.vaibhav.minion.referralportal.model.auth.RegisterReposne;
-import com.vaibhav.minion.referralportal.model.auth.RegisterRequest;
+import com.vaibhav.minion.referralportal.utility.LoginRequest;
+import com.vaibhav.minion.referralportal.utility.LoginResponse;
+import com.vaibhav.minion.referralportal.utility.RegisterReposne;
+import com.vaibhav.minion.referralportal.utility.RegisterRequest;
 import com.vaibhav.minion.referralportal.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

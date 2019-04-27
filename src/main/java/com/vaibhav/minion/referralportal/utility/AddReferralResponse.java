@@ -1,4 +1,4 @@
-package com.vaibhav.minion.referralportal.model;
+package com.vaibhav.minion.referralportal.utility;
 
 public class AddReferralResponse {
 

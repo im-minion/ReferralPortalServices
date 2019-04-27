@@ -1,9 +1,9 @@
 package com.vaibhav.minion.referralportal.dao;
 
-import com.vaibhav.minion.referralportal.model.auth.LoginRequest;
-import com.vaibhav.minion.referralportal.model.auth.LoginResponse;
-import com.vaibhav.minion.referralportal.model.auth.RegisterReposne;
-import com.vaibhav.minion.referralportal.model.auth.RegisterRequest;
+import com.vaibhav.minion.referralportal.utility.LoginRequest;
+import com.vaibhav.minion.referralportal.utility.LoginResponse;
+import com.vaibhav.minion.referralportal.utility.RegisterReposne;
+import com.vaibhav.minion.referralportal.utility.RegisterRequest;
 
 public interface AuthDao {
     public LoginResponse loginUser(LoginRequest loginRequest); //GET

@@ -1,8 +1,8 @@
 package com.vaibhav.minion.referralportal.service;
 
 import com.vaibhav.minion.referralportal.dao.EmployeeDao;
-import com.vaibhav.minion.referralportal.model.AddReferralRequest;
-import com.vaibhav.minion.referralportal.model.AddReferralResponse;
+import com.vaibhav.minion.referralportal.utility.AddReferralRequest;
+import com.vaibhav.minion.referralportal.utility.AddReferralResponse;
 import com.vaibhav.minion.referralportal.model.JOBS;
 import com.vaibhav.minion.referralportal.model.REFERRALS;
 import org.springframework.beans.factory.annotation.Autowired;

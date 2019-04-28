@@ -71,7 +71,6 @@ public class HMServiceImpl implements IHMService {
 
     @Override
     public UpdateReferralStatusResponse updateReferralStatus(UpdateReferralStatusRequest updateReferralStatusRequest) {
-        UpdateReferralStatusResponse updateReferralStatusResponse;
         try {
 
             ReferralStatusReasons referralStatusReasons = new ReferralStatusReasons();

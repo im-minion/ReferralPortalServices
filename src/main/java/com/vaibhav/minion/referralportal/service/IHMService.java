@@ -1,11 +1,13 @@
-package com.vaibhav.minion.referralportal.dao;
+package com.vaibhav.minion.referralportal.service;
 
-import com.vaibhav.minion.referralportal.model.*;
+import com.vaibhav.minion.referralportal.model.JOBS;
+import com.vaibhav.minion.referralportal.model.REFERRALS;
 import com.vaibhav.minion.referralportal.utility.*;
 
 import java.util.List;
 
-public interface HMDao {
+
+public interface IHMService {
 
     public InsertJobResponse insertJob(InsertJobRequest insertJobRequest);
 

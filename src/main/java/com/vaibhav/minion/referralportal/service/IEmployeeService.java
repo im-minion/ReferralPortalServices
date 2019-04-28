@@ -1,13 +1,13 @@
-package com.vaibhav.minion.referralportal.dao;
+package com.vaibhav.minion.referralportal.service;
 
-import com.vaibhav.minion.referralportal.utility.AddReferralResponse;
-import com.vaibhav.minion.referralportal.utility.AddReferralRequest;
 import com.vaibhav.minion.referralportal.model.JOBS;
 import com.vaibhav.minion.referralportal.model.REFERRALS;
+import com.vaibhav.minion.referralportal.utility.AddReferralRequest;
+import com.vaibhav.minion.referralportal.utility.AddReferralResponse;
 
 import java.util.List;
 
-public interface EmployeeDao {
+public interface IEmployeeService {
 
     public List<JOBS> getAllOpenJobs();
 

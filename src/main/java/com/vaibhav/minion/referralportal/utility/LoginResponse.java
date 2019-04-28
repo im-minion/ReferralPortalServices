@@ -5,6 +5,12 @@ public class LoginResponse {
     private String employeeRole;
     private String message;
 
+    public LoginResponse(String employeeId, String employeeRole, String message) {
+        this.employeeId = employeeId;
+        this.employeeRole = employeeRole;
+        this.message = message;
+    }
+
     public String getEmployeeId() {
         return employeeId;
     }

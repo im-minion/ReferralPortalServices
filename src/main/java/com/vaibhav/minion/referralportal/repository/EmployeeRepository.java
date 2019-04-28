@@ -1,8 +1,5 @@
 package com.vaibhav.minion.referralportal.repository;
 
-import com.vaibhav.minion.referralportal.dao.EmployeeDao;
-import com.vaibhav.minion.referralportal.utility.AddReferralRequest;
-import com.vaibhav.minion.referralportal.utility.AddReferralResponse;
 import com.vaibhav.minion.referralportal.model.JOBS;
 import com.vaibhav.minion.referralportal.model.REFERRALS;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class EmployeeRepository implements EmployeeDao {
+public class EmployeeRepository {
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -23,7 +20,6 @@ public class EmployeeRepository implements EmployeeDao {
 
     private static final String JOBS_COLLECTION = "JOBS";
 
-    @Override
     public List<JOBS> getAllOpenJobs() {
         Criteria criteriaJobVisibility = new Criteria("jobVisibility").is(true);
         Criteria criteriaJobStatus = new Criteria("jobStatus").is("OPEN");
@@ -32,7 +28,6 @@ public class EmployeeRepository implements EmployeeDao {
         return mongoTemplate.find(query, JOBS.class, JOBS_COLLECTION);
     }
 
-    @Override
     public List<REFERRALS> getReferralsOfEmployeeId(String employeeId) {
         Query query = new Query();
         Criteria referredByCriteria = new Criteria("referredBy").is(employeeId);
@@ -40,39 +35,15 @@ public class EmployeeRepository implements EmployeeDao {
         return mongoTemplate.find(query, REFERRALS.class, REFERRALS_COLLECTION);
     }
 
-    @Override
-    public AddReferralResponse addReferral(AddReferralRequest addReferralRequest) {
-        AddReferralResponse addReferralResponse;
-        try {
-            REFERRALS referrals = new REFERRALS();
-            if(!isReferralEmailIdExists(addReferralRequest.getReferralEmailId())) {
-                referrals.setReferralEmailId(addReferralRequest.getReferralEmailId());
-                referrals.setDob(addReferralRequest.getDob());
-                referrals.setJobId(addReferralRequest.getJobId());
-                referrals.setPanNumber(addReferralRequest.getPanNumber());
-                referrals.setReferDate(addReferralRequest.getReferDate());
-                referrals.setReferralName(addReferralRequest.getReferralName());
-                referrals.setPrimarySkill(addReferralRequest.getPrimarySkill());
-                referrals.setSecondarySkill(addReferralRequest.getSecondarySkill());
-                referrals.setReferredBy(addReferralRequest.getReferredBy());
-
-                mongoTemplate.insert(referrals, REFERRALS_COLLECTION);
-                addReferralResponse = new AddReferralResponse("", true, "");
-            }else {
-                addReferralResponse = new AddReferralResponse("", false, "Referral Email Id already Exists can't refer!");
-            }
-            return addReferralResponse;
-        } catch (Exception e) {
-            addReferralResponse = new AddReferralResponse("", false, "");
-        }
-        return addReferralResponse;
+    public REFERRALS addReferral(REFERRALS referrals) {
+        return mongoTemplate.insert(referrals, REFERRALS_COLLECTION);
     }
 
-    private boolean isReferralEmailIdExists(String referralEmailId) {
+    public boolean isReferralEmailIdExists(String referralEmailId) {
         Criteria emailIdCriteria = new Criteria("referralEmailId").is(referralEmailId);
         Query query = new Query();
         query.addCriteria(emailIdCriteria);
-        REFERRALS referral = mongoTemplate.findOne(query,REFERRALS.class,REFERRALS_COLLECTION);
+        REFERRALS referral = mongoTemplate.findOne(query, REFERRALS.class, REFERRALS_COLLECTION);
         return referral != null;
     }
 }

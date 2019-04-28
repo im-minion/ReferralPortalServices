@@ -1,8 +1,9 @@
 package com.vaibhav.minion.referralportal.controller;
 
-import com.vaibhav.minion.referralportal.model.*;
-import com.vaibhav.minion.referralportal.service.EmployeeService;
-import com.vaibhav.minion.referralportal.service.HMService;
+import com.vaibhav.minion.referralportal.model.JOBS;
+import com.vaibhav.minion.referralportal.model.REFERRALS;
+import com.vaibhav.minion.referralportal.service.IEmployeeService;
+import com.vaibhav.minion.referralportal.service.IHMService;
 import com.vaibhav.minion.referralportal.utility.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +16,10 @@ import java.util.List;
 public class ReferralPortalController {
 
     @Autowired
-    private HMService hmService;
+    private IHMService hmService;
 
     @Autowired
-    private EmployeeService employeeService;
+    private IEmployeeService employeeService;
 
     /*********************************************_HM_***********************************************************/
 
@@ -30,7 +31,7 @@ public class ReferralPortalController {
 
     @GetMapping(value = "/hm/getOpenJob", consumes = "application/json", produces = "application/json")
     public ResponseEntity<List<JOBS>> getOpenJobs(@RequestParam("employeeId") String employeeId) {
-        List<JOBS> openJobsList = hmService.getOpenJobs(employeeId);
+        List<JOBS> openJobsList = hmService.getAllJobsForHm(employeeId);
         return ResponseEntity.ok().body(openJobsList);
     }
 

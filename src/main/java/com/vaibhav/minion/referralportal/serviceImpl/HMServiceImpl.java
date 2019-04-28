@@ -54,6 +54,17 @@ public class HMServiceImpl implements IHMService {
     }
 
     @Override
+    public UpdateJobVisibilityResponse updateJobVisibility(Double jobId) {
+        try {
+            boolean currentVisibility = hmRepository.getCurrentJobVisibility(jobId);
+            hmRepository.updateJobVisibility(jobId, currentVisibility);
+            return new UpdateJobVisibilityResponse("Success", !currentVisibility);
+        } catch (Exception e) {
+            return new UpdateJobVisibilityResponse("Failure", false);
+        }
+    }
+
+    @Override
     public UpdateJobStatusResponse updateJobStatus(UpdateJobStatusRequest updateJobStatusRequest) {
         return hmRepository.updateJobStatus(updateJobStatusRequest);
     }

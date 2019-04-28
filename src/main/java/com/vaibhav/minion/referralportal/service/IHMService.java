@@ -15,6 +15,8 @@ public interface IHMService {
 
     public List<REFERRALS> getReferralsFromJobId(Double jobId);
 
+    public UpdateJobVisibilityResponse updateJobVisibility(Double jobId);
+
     public UpdateJobStatusResponse updateJobStatus(UpdateJobStatusRequest updateJobStatusRequest);
 
     public UpdateReferralStatusResponse updateReferralStatus(UpdateReferralStatusRequest updateReferralStatusRequest);

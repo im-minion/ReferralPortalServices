@@ -41,6 +41,12 @@ public class ReferralPortalController {
         return ResponseEntity.ok().body(referralsList);
     }
 
+    @GetMapping(value = "/hm/updateJobVisibility", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<UpdateJobVisibilityResponse> updateJobVisibility(@RequestParam("jobId") Double jobId) {
+        UpdateJobVisibilityResponse updateJobVisibilityResponse = hmService.updateJobVisibility(jobId);
+        return ResponseEntity.ok().body(updateJobVisibilityResponse);
+    }
+
     @PostMapping(value = "/hm/updateJobStatus", consumes = "application/json", produces = "application/json")
     public ResponseEntity<UpdateJobStatusResponse> updateJobStatus(@RequestBody UpdateJobStatusRequest updateJobStatusRequest) {
         UpdateJobStatusResponse updateJobStatusResponse = hmService.updateJobStatus(updateJobStatusRequest);
@@ -49,11 +55,10 @@ public class ReferralPortalController {
 
     @PostMapping(value = "/hm/updateReferralsStatus", consumes = "application/json", produces = "application/json")
     public ResponseEntity<UpdateReferralStatusResponse> updateReferralStatus(@RequestBody UpdateReferralStatusRequest updateReferralStatusRequest) {
-        UpdateReferralStatusResponse updateReferralStatusResponse= hmService.updateReferralStatus(updateReferralStatusRequest);
+        UpdateReferralStatusResponse updateReferralStatusResponse = hmService.updateReferralStatus(updateReferralStatusRequest);
         return ResponseEntity.ok().body(updateReferralStatusResponse);
     }
 
-//    TODO: REASON WHILE UPDATING
 
     /*********************************************_EMPLOYEE_***********************************************************/
 

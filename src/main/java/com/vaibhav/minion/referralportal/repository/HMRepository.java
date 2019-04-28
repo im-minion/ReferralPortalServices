@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class HMRepository {
@@ -76,6 +77,15 @@ public class HMRepository {
         query.addCriteria(referralEmailIdCriteria);
 
         mongoTemplate.updateFirst(query, update, REFERRALS.class, REFERRALS_COLLECTION);
+    }
+
+    public void updateJobVisibility(Double jobId, boolean currentVisibility) {
+//        enhanced version of query
+        mongoTemplate.updateFirst(Query.query(new Criteria("jobId").is(jobId)), new Update().set("jobVisibility", !currentVisibility), OPEN_JOBS_COLLECTION);
+    }
+
+    public boolean getCurrentJobVisibility(Double jobId) {
+        return Objects.requireNonNull(mongoTemplate.findOne(Query.query(new Criteria("jobId").is(jobId)), JOBS.class)).isJobVisibility();
     }
 
 }

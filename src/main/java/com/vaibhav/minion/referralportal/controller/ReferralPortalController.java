@@ -8,6 +8,7 @@ import com.vaibhav.minion.referralportal.utility.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -69,8 +70,8 @@ public class ReferralPortalController {
     }
 
     @PostMapping(value = "/employee/addReferral", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<AddReferralResponse> addReferal(@RequestBody AddReferralRequest addReferralRequest) {
-        AddReferralResponse referralResponse = employeeService.addReferral(addReferralRequest);
+    public ResponseEntity<AddReferralResponse> addReferal(@RequestParam("file") String resume, @RequestBody AddReferralRequest addReferralRequest) {
+        AddReferralResponse referralResponse = employeeService.addReferral(resume, addReferralRequest);
         return ResponseEntity.ok().body(referralResponse);
     }
 

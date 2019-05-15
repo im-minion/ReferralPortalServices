@@ -6,8 +6,11 @@ import com.vaibhav.minion.referralportal.repository.EmployeeRepository;
 import com.vaibhav.minion.referralportal.service.IEmployeeService;
 import com.vaibhav.minion.referralportal.utility.AddReferralRequest;
 import com.vaibhav.minion.referralportal.utility.AddReferralResponse;
+import org.bson.BsonBinarySubType;
+import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -29,7 +32,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
     }
 
     @Override
-    public AddReferralResponse addReferral(AddReferralRequest addReferralRequest) {
+    public AddReferralResponse addReferral(String resume, AddReferralRequest addReferralRequest) {
         AddReferralResponse addReferralResponse;
         try {
             REFERRALS referrals = new REFERRALS();
@@ -42,6 +45,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
                 referrals.setReferralName(addReferralRequest.getReferralName());
                 referrals.setPrimarySkill(addReferralRequest.getPrimarySkill());
                 referrals.setSecondarySkill(addReferralRequest.getSecondarySkill());
+                referrals.setResume(new Binary(BsonBinarySubType.BINARY, resume.getBytes()));
                 referrals.setReferredBy(addReferralRequest.getReferredBy());
 
                 REFERRALS r = employeeRepository.addReferral(referrals);

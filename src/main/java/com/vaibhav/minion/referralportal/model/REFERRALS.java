@@ -1,6 +1,7 @@
 package com.vaibhav.minion.referralportal.model;
 
 import com.vaibhav.minion.referralportal.utility.ReferralStatusReasons;
+import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -21,6 +22,7 @@ public class REFERRALS {
     private String yoe;
     private String primarySkill;
     private String secondarySkill;
+    private Binary resume;
     private String referralCurrentLevel = "RESUME_SCREENING";
     private String referralCurrentStatus = "PENDING";
 //    will be pending by default but once referral processed it will be  ACCEPTED or REJECTED
@@ -105,6 +107,14 @@ public class REFERRALS {
 
     public void setSecondarySkill(String secondarySkill) {
         this.secondarySkill = secondarySkill;
+    }
+
+    public Binary getResume() {
+        return resume;
+    }
+
+    public void setResume(Binary resume) {
+        this.resume = resume;
     }
 
     public String getReferralCurrentLevel() {

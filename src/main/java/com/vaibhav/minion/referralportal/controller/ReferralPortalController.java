@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/rp")
+@CrossOrigin("*")
 public class ReferralPortalController {
 
     @Autowired

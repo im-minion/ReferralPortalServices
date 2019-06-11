@@ -22,6 +22,11 @@ public class ReferralPortalController {
     @Autowired
     private IEmployeeService employeeService;
 
+    @GetMapping(value = "/ping")
+    public ResponseEntity<String> ping() {
+        return ResponseEntity.ok().body("Hail Hitler!");
+    }
+
     /*********************************************_HM_***********************************************************/
 
     @PostMapping(value = "/hm/insertJob", consumes = "application/json", produces = "application/json")

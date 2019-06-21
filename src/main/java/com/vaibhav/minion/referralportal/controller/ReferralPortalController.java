@@ -4,6 +4,7 @@ import com.vaibhav.minion.referralportal.model.JOBS;
 import com.vaibhav.minion.referralportal.model.REFERRALS;
 import com.vaibhav.minion.referralportal.service.IEmployeeService;
 import com.vaibhav.minion.referralportal.service.IHMService;
+import com.vaibhav.minion.referralportal.service.IHRService;
 import com.vaibhav.minion.referralportal.utility.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,9 @@ public class ReferralPortalController {
 
     @Autowired
     private IEmployeeService employeeService;
+
+    @Autowired
+    private IHRService hrService;
 
     @GetMapping(value = "/ping")
     public ResponseEntity<String> ping() {
@@ -87,7 +91,12 @@ public class ReferralPortalController {
     }
 
     /*********************************************_HR_***********************************************************/
-//TODO: figure Out end points for HM
+//TODO: figure Out end points for HR
+    @GetMapping(value = "/hr/getReferralsAtHr", produces = "application/json")
+    public ResponseEntity<List<REFERRALS>> getReferralsAtHr() {
+        List<REFERRALS> referralsList = hrService.getReferralsAtHr();
+        return ResponseEntity.ok().body(referralsList);
+    }
     /*********************************************_ADMIN_***********************************************************/
 //TODO: update Employee Role
 }

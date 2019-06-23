@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public class AuthRepository {
 
     @Autowired
     private MongoTemplate mongoTemplate;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     private static final String EMPLOYEE_COLLECTION = "EMPLOYEE";
     private static final String DEFAULT_ROLE = "EMPLOYEE";
@@ -39,8 +42,22 @@ public class AuthRepository {
     public EMPLOYEE registerUser(RegisterRequest registerRequest) {
         EMPLOYEE employee = new EMPLOYEE();
         employee.setEmployeeId(registerRequest.getEmployeeId());
-        employee.setEncryptedPassword(registerRequest.getPassword());
+        employee.setEncryptedPassword(passwordEncoder.encode(registerRequest.getPassword()));
         employee.setEmployeeRole(DEFAULT_ROLE);
         return mongoTemplate.insert(employee);
+    }
+
+    public EMPLOYEE findByUsernameOrEmail(String usernameOrEmail, String employeeId) {
+        Criteria loginEmployeeIdCriteria = new Criteria("employeeId").is(employeeId);
+        Query query = new Query();
+        query.addCriteria(loginEmployeeIdCriteria);
+        return mongoTemplate.findOne(query, EMPLOYEE.class, EMPLOYEE_COLLECTION);
+    }
+
+    public EMPLOYEE findById(String employeeId) {
+        Criteria loginEmployeeIdCriteria = new Criteria("employeeId").is(employeeId);
+        Query query = new Query();
+        query.addCriteria(loginEmployeeIdCriteria);
+        return mongoTemplate.findOne(query, EMPLOYEE.class, EMPLOYEE_COLLECTION);
     }
 }

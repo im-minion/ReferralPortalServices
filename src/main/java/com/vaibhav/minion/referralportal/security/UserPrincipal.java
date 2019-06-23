@@ -48,6 +48,14 @@ public class UserPrincipal implements UserDetails {
         );
     }
 
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
+    }
+
     public String getId() {
         return id;
     }

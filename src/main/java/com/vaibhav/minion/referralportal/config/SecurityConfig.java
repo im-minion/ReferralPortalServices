@@ -88,7 +88,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .hasAuthority("HR")
 
                 .antMatchers("/rp/admin/**")
-                .hasAuthority("HR")
+                .hasAuthority("ADMIN")
 
                 .anyRequest()
                 .authenticated();

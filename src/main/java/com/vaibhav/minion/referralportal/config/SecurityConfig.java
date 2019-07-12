@@ -21,11 +21,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(
-        securedEnabled = true,
-        jsr250Enabled = true,
-        prePostEnabled = true
-)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     CustomUserDetailsService customUserDetailsService;
@@ -82,13 +77,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/rp/auth/**")
                 .permitAll()
-                .anyRequest().authenticated()
-                .antMatchers(HttpMethod.GET, "/rp/**")
+                .antMatchers("/rp/ping**")
                 .hasAuthority("EMPLOYEE")
-//                .antMatchers("/api/user/checkUsernameAvailability", "/api/user/checkEmailAvailability")
-//                .permitAll()
-//                .antMatchers(HttpMethod.GET, "/rp/**/**")
-//                .permitAll()
                 .anyRequest()
                 .authenticated();
 

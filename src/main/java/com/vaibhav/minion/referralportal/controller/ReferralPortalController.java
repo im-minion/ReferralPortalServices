@@ -30,7 +30,7 @@ public class ReferralPortalController {
     private IHRService hrService;
 
     @GetMapping(value = "/ping")
-    @Secured({"ROLE_EMPLOYEE"})
+//    @Secured("ROLE_EMPLOYEE")
     public ResponseEntity<String> ping() {
         return ResponseEntity.ok().body("Hail Hitler!");
     }

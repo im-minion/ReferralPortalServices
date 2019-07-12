@@ -5,10 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class UserPrincipal implements UserDetails {
     private String id;
@@ -36,8 +33,10 @@ public class UserPrincipal implements UserDetails {
 //                new SimpleGrantedAuthority(employeeRole.getName().name())
 //        ).collect(Collectors.toList());
 //        TODO : DEBUG AND VALIDATE FOLLOWING
-        List<GrantedAuthority> authorities =
-                Collections.singletonList(new SimpleGrantedAuthority(user.getEmployeeRole()));
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        GrantedAuthority g = new SimpleGrantedAuthority(user.getEmployeeRole());
+        authorities.add(g);
+//                Collections.singletonList(new SimpleGrantedAuthority(user.getEmployeeRole()));
 
         return new UserPrincipal(
                 user.getId(),

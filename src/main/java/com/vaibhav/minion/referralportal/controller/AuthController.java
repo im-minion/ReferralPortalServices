@@ -1,11 +1,17 @@
 package com.vaibhav.minion.referralportal.controller;
 
+import com.vaibhav.minion.referralportal.security.JwtAuthenticationResponse;
+import com.vaibhav.minion.referralportal.security.JwtTokenProvider;
 import com.vaibhav.minion.referralportal.service.IAuthService;
 import com.vaibhav.minion.referralportal.utility.LoginRequest;
-import com.vaibhav.minion.referralportal.utility.LoginResponse;
 import com.vaibhav.minion.referralportal.utility.RegisterReposne;
 import com.vaibhav.minion.referralportal.utility.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,9 +22,23 @@ public class AuthController {
     @Autowired
     private IAuthService authService;
 
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    JwtTokenProvider tokenProvider;
+
     @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
-    public LoginResponse loginUser(@RequestBody LoginRequest loginRequest) {
-        return authService.loginUser(loginRequest);
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getEmployeeId(),
+                        loginRequest.getPassword()
+                )
+        );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = tokenProvider.generateToken(authentication);
+        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 
     @PostMapping(value = "/register", consumes = "application/json", produces = "application/json")

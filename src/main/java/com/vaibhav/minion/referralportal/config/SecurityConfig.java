@@ -77,8 +77,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/rp/auth/**")
                 .permitAll()
-                .antMatchers("/rp/ping**")
+
+                .antMatchers("/rp/employee/**")
                 .hasAuthority("EMPLOYEE")
+
+                .antMatchers("/rp/hm/**", "/rp/employee/**")
+                .hasAuthority("HM")
+
+                .antMatchers("/rp/hr/**", "/rp/employee/**")
+                .hasAuthority("HR")
+
+                .antMatchers("/rp/admin/**")
+                .hasAuthority("HR")
+
                 .anyRequest()
                 .authenticated();
 

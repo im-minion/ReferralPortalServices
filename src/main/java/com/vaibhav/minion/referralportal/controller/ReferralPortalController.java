@@ -29,10 +29,19 @@ public class ReferralPortalController {
     @Autowired
     private IHRService hrService;
 
-    @GetMapping(value = "/ping")
-//    @Secured("ROLE_EMPLOYEE")
+    @GetMapping(value = "/employee/ping")
     public ResponseEntity<String> ping() {
-        return ResponseEntity.ok().body("Hail Hitler!");
+        return ResponseEntity.ok().body("Hi employee!");
+    }
+
+    @GetMapping(value = "/hm/ping")
+    public ResponseEntity<String> pingHM() {
+        return ResponseEntity.ok().body("Hi HM!");
+    }
+
+    @GetMapping(value = "/hr/ping")
+    public ResponseEntity<String> pingHR() {
+        return ResponseEntity.ok().body("Hi HR!");
     }
 
     /*********************************************_HM_***********************************************************/

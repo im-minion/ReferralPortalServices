@@ -1,4 +1,5 @@
 package com.vaibhav.minion.referralportal.security;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vaibhav.minion.referralportal.model.EMPLOYEE;
 import org.springframework.security.core.GrantedAuthority;
@@ -33,9 +34,9 @@ public class UserPrincipal implements UserDetails {
 //                new SimpleGrantedAuthority(employeeRole.getName().name())
 //        ).collect(Collectors.toList());
 //        TODO : DEBUG AND VALIDATE FOLLOWING
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        GrantedAuthority g = new SimpleGrantedAuthority(user.getEmployeeRole());
-        authorities.add(g);
+        List<GrantedAuthority> authorities = getAuthorityFromRole(user.getEmployeeRole());
+//        GrantedAuthority g = new SimpleGrantedAuthority(user.getEmployeeRole());
+//        authorities.add(g);
 //                Collections.singletonList(new SimpleGrantedAuthority(user.getEmployeeRole()));
 
         return new UserPrincipal(
@@ -45,6 +46,29 @@ public class UserPrincipal implements UserDetails {
                 user.getEncryptedPassword(),
                 authorities
         );
+    }
+
+    private static List<GrantedAuthority> getAuthorityFromRole(String employeeRole) {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        switch (employeeRole) {
+            case "EMPLOYEE":
+                authorities.add(new SimpleGrantedAuthority("EMPLOYEE"));
+                break;
+            case "HM":
+                authorities.add(new SimpleGrantedAuthority("EMPLOYEE"));
+                authorities.add(new SimpleGrantedAuthority("HM"));
+                break;
+            case "HR":
+                authorities.add(new SimpleGrantedAuthority("EMPLOYEE"));
+                authorities.add(new SimpleGrantedAuthority("HR"));
+                break;
+            case "ADMIN":
+                authorities.add(new SimpleGrantedAuthority("ADMIN"));
+                break;
+            default:
+                authorities.add(new SimpleGrantedAuthority("NO_ROLE"));
+        }
+        return authorities;
     }
 
     public String getEmployeeId() {

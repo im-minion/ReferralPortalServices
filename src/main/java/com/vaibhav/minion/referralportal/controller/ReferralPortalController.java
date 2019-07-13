@@ -44,6 +44,11 @@ public class ReferralPortalController {
         return ResponseEntity.ok().body("Hi HR!");
     }
 
+    @GetMapping(value = "/admin/ping")
+    public ResponseEntity<String> pingAdmin() {
+        return ResponseEntity.ok().body("Hi Admin!");
+    }
+
     /*********************************************_HM_***********************************************************/
 
     @PostMapping(value = "/hm/insertJob", consumes = "application/json", produces = "application/json")

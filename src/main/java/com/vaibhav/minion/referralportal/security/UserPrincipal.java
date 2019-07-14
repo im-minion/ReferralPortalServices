@@ -33,14 +33,7 @@ public class UserPrincipal implements UserDetails {
     }
 
     public static UserPrincipal create(EMPLOYEE user) {
-//        List<GrantedAuthority> authorities = user.getEmployeeRole().stream().map(employeeRole ->
-//                new SimpleGrantedAuthority(employeeRole.getName().name())
-//        ).collect(Collectors.toList());
-//        TODO : DEBUG AND VALIDATE FOLLOWING
         List<GrantedAuthority> authorities = getAuthorityFromRole(user.getEmployeeRole());
-//        GrantedAuthority g = new SimpleGrantedAuthority(user.getEmployeeRole());
-//        authorities.add(g);
-//                Collections.singletonList(new SimpleGrantedAuthority(user.getEmployeeRole()));
 
         return new UserPrincipal(
                 user.getId(),

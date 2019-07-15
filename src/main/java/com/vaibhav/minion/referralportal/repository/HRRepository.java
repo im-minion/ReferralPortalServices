@@ -21,4 +21,8 @@ public class HRRepository {
         query.addCriteria(new Criteria("referralCurrentLevel").is("HR")).addCriteria(new Criteria("referralCurrentStatus").is("PENDING"));
         return mongoTemplate.find(query, REFERRALS.class, REFERRALS_COLLECTION);
     }
+
+    public List<REFERRALS> getAllReferralsForHr() {
+        return mongoTemplate.findAll(REFERRALS.class, REFERRALS_COLLECTION);
+    }
 }

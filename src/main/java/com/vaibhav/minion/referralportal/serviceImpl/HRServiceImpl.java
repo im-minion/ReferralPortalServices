@@ -19,6 +19,11 @@ public class HRServiceImpl implements IHRService {
         return hrRepository.getReferralsAtHr();
     }
 
+    @Override
+    public List<REFERRALS> getAllReferralsForHr() {
+        return hrRepository.getAllReferralsForHr();
+    }
+
 //    private List<REFERRALS> filterReferrals(List<REFERRALS> allReferrals) {
 ////        allReferrals.stream().filter( referral -> {
 ////            referral.getReferralStatusReasonsList().stream().filter( referralStatusReasons -> {

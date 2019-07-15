@@ -112,6 +112,19 @@ public class ReferralPortalController {
         List<REFERRALS> referralsList = hrService.getReferralsAtHr();
         return ResponseEntity.ok().body(referralsList);
     }
+
+    @PostMapping(value = "/hr/updateReferralsStatus", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<UpdateReferralStatusResponse> updateReferralStatusHR(@RequestBody UpdateReferralStatusRequest updateReferralStatusRequest) {
+        UpdateReferralStatusResponse updateReferralStatusResponse = hmService.updateReferralStatus(updateReferralStatusRequest);
+        return ResponseEntity.ok().body(updateReferralStatusResponse);
+    }
+
+    @GetMapping(value = "/hr/getAllReferrals", produces = "application/json")
+    public ResponseEntity<List<REFERRALS>> getAllReferralsForHr() {
+        List<REFERRALS> referralsList = hrService.getAllReferralsForHr();
+        return ResponseEntity.ok().body(referralsList);
+    }
+
     /*********************************************_ADMIN_***********************************************************/
 //TODO: update Employee Role
 }

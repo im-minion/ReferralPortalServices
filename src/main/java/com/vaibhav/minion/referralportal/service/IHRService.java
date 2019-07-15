@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface IHRService {
 
-    public List<REFERRALS> getReferralsAtHr();
+    List<REFERRALS> getReferralsAtHr();
+
+    List<REFERRALS> getAllReferralsForHr();
 }

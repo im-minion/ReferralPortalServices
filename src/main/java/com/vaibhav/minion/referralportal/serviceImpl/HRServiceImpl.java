@@ -1,7 +1,9 @@
 package com.vaibhav.minion.referralportal.serviceImpl;
 
 import com.vaibhav.minion.referralportal.model.REFERRALS;
-import com.vaibhav.minion.referralportal.repository.HRRepository;
+import com.vaibhav.minion.referralportal.repository.EmployeeRepository;
+import com.vaibhav.minion.referralportal.repository.JobsRepository;
+import com.vaibhav.minion.referralportal.repository.ReferralsRepository;
 import com.vaibhav.minion.referralportal.service.IHRService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,18 +12,25 @@ import java.util.List;
 
 @Service
 public class HRServiceImpl implements IHRService {
+
     @Autowired
-    private HRRepository hrRepository;
+    private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private JobsRepository jobsRepository;
+
+    @Autowired
+    private ReferralsRepository referralsRepository;
 
     @Override
     public List<REFERRALS> getReferralsAtHr() {
 
-        return hrRepository.getReferralsAtHr();
+        return referralsRepository.getReferralsAtHr();
     }
 
     @Override
     public List<REFERRALS> getAllReferralsForHr() {
-        return hrRepository.getAllReferralsForHr();
+        return referralsRepository.getAllReferralsForHr();
     }
 
 //    private List<REFERRALS> filterReferrals(List<REFERRALS> allReferrals) {

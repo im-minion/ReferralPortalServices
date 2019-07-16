@@ -1,7 +1,9 @@
 package com.vaibhav.minion.referralportal.serviceImpl;
 
 import com.vaibhav.minion.referralportal.model.EMPLOYEE;
-import com.vaibhav.minion.referralportal.repository.AuthRepository;
+import com.vaibhav.minion.referralportal.repository.EmployeeRepository;
+import com.vaibhav.minion.referralportal.repository.JobsRepository;
+import com.vaibhav.minion.referralportal.repository.ReferralsRepository;
 import com.vaibhav.minion.referralportal.service.IAuthService;
 import com.vaibhav.minion.referralportal.utility.LoginRequest;
 import com.vaibhav.minion.referralportal.utility.LoginResponse;
@@ -13,15 +15,24 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthServiceImpl implements IAuthService {
 
+//    @Autowired
+//    private AuthRepository authRepository;
+
     @Autowired
-    private AuthRepository authRepository;
+    private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private JobsRepository jobsRepository;
+
+    @Autowired
+    private ReferralsRepository referralsRepository;
 
 
     @Override
     public LoginResponse loginUser(LoginRequest loginRequest) {
         LoginResponse loginResponse;// = null;
 
-        EMPLOYEE employee = authRepository.loginUser(loginRequest);
+        EMPLOYEE employee = employeeRepository.loginUser(loginRequest);
 
         if (employee != null) {
             loginResponse = new LoginResponse(employee.getEmployeeId(), employee.getEmployeeRole(), "SUCCESS");
@@ -35,13 +46,13 @@ public class AuthServiceImpl implements IAuthService {
     public RegisterReposne registerUser(RegisterRequest registerRequest) {
         RegisterReposne registerReposne;// = null;
 
-        boolean isEmployeeIdExists = authRepository.checkIsEmployeeIdExists(registerRequest.getEmployeeId());
+        boolean isEmployeeIdExists = employeeRepository.checkIsEmployeeIdExists(registerRequest.getEmployeeId());
 
         if (isEmployeeIdExists) {
             registerReposne = new RegisterReposne("EmployeeId " + registerRequest.getEmployeeId() + " already exists, cannot Register", null, null);
         } else {
             try {
-                EMPLOYEE employee = authRepository.registerUser(registerRequest);
+                EMPLOYEE employee = employeeRepository.registerUser(registerRequest);
                 registerReposne = new RegisterReposne("SUCCESS", employee.getEmployeeId(), employee.getEmployeeRole());
             } catch (Exception e) {
                 registerReposne = new RegisterReposne("FAILED IN  INSERTING", null, null);

@@ -2,6 +2,7 @@ package com.vaibhav.minion.referralportal.controller;
 
 import com.vaibhav.minion.referralportal.model.JOBS;
 import com.vaibhav.minion.referralportal.model.REFERRALS;
+import com.vaibhav.minion.referralportal.service.IAdminService;
 import com.vaibhav.minion.referralportal.service.IEmployeeService;
 import com.vaibhav.minion.referralportal.service.IHMService;
 import com.vaibhav.minion.referralportal.service.IHRService;
@@ -25,6 +26,9 @@ public class ReferralPortalController {
 
     @Autowired
     private IHRService hrService;
+
+    @Autowired
+    private IAdminService adminService;
 
     @GetMapping(value = "/employee/ping")
     public ResponseEntity<String> ping() {
@@ -106,7 +110,7 @@ public class ReferralPortalController {
     }
 
     /*********************************************_HR_***********************************************************/
-//TODO: figure Out end points for HR
+
     @GetMapping(value = "/hr/getReferralsAtHr", produces = "application/json")
     public ResponseEntity<List<REFERRALS>> getReferralsAtHr() {
         List<REFERRALS> referralsList = hrService.getReferralsAtHr();
@@ -126,5 +130,10 @@ public class ReferralPortalController {
     }
 
     /*********************************************_ADMIN_***********************************************************/
-//TODO: update Employee Role
+
+    @PostMapping(value = "/admin/changeRole")
+    public ResponseEntity<ChangeRoleResponse> changeEmployeeRole(@RequestBody ChangeRoleRequest changeRoleRequest) {
+        ChangeRoleResponse changeRoleResponse = adminService.changeEmployeeRole(changeRoleRequest);
+        return ResponseEntity.ok().body(changeRoleResponse);
+    }
 }

@@ -2,7 +2,9 @@ package com.vaibhav.minion.referralportal.serviceImpl;
 
 import com.vaibhav.minion.referralportal.model.JOBS;
 import com.vaibhav.minion.referralportal.model.REFERRALS;
-import com.vaibhav.minion.referralportal.repository.HMRepository;
+import com.vaibhav.minion.referralportal.repository.EmployeeRepository;
+import com.vaibhav.minion.referralportal.repository.JobsRepository;
+import com.vaibhav.minion.referralportal.repository.ReferralsRepository;
 import com.vaibhav.minion.referralportal.service.IHMService;
 import com.vaibhav.minion.referralportal.utility.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +16,20 @@ import java.util.List;
 public class HMServiceImpl implements IHMService {
 
     @Autowired
-    private HMRepository hmRepository;
+    private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private JobsRepository jobsRepository;
+
+    @Autowired
+    private ReferralsRepository referralsRepository;
 
     @Override
     public InsertJobResponse insertJob(InsertJobRequest insertJobRequest) {
         InsertJobResponse insertJobResponse;
         try {
             JOBS jobs = new JOBS();
-            if (!hmRepository.isJobIdExists(insertJobRequest.getJobId())) {
+            if (!jobsRepository.isJobIdExists(insertJobRequest.getJobId())) {
                 jobs.setJobId(insertJobRequest.getJobId());
                 jobs.setJobDescription(insertJobRequest.getJobDescription());
                 jobs.setJobTitle(insertJobRequest.getJobTitle());
@@ -29,7 +37,7 @@ public class HMServiceImpl implements IHMService {
                 jobs.setCreatedByEmployeeId(insertJobRequest.getCreatedByEmployeeId());
                 jobs.setPrimarySkill(insertJobRequest.getPrimarySkill());
                 jobs.setSecondarySkill(insertJobRequest.getSecondarySkill());
-                hmRepository.insertJob(jobs);
+                jobsRepository.insertJob(jobs);
                 insertJobResponse = new InsertJobResponse(jobs.getId(), true, "success");
                 //return insertJobResponse;
             } else {
@@ -45,19 +53,19 @@ public class HMServiceImpl implements IHMService {
 
     @Override
     public List<JOBS> getAllJobsForHm(String employeeId) {
-        return hmRepository.getAllJobsForHm(employeeId);
+        return jobsRepository.getAllJobsForHm(employeeId);
     }
 
     @Override
     public List<REFERRALS> getReferralsFromJobId(Double jobId) {
-        return hmRepository.getReferralsFromJobId(jobId);
+        return referralsRepository.getReferralsFromJobId(jobId);
     }
 
     @Override
     public UpdateJobVisibilityResponse updateJobVisibility(Double jobId) {
         try {
-            boolean currentVisibility = hmRepository.getCurrentJobVisibility(jobId);
-            hmRepository.updateJobVisibility(jobId, currentVisibility);
+            boolean currentVisibility = jobsRepository.getCurrentJobVisibility(jobId);
+            jobsRepository.updateJobVisibility(jobId, currentVisibility);
             return new UpdateJobVisibilityResponse("Success", !currentVisibility);
         } catch (Exception e) {
             return new UpdateJobVisibilityResponse("Failure", false);
@@ -66,7 +74,7 @@ public class HMServiceImpl implements IHMService {
 
     @Override
     public UpdateJobStatusResponse updateJobStatus(UpdateJobStatusRequest updateJobStatusRequest) {
-        return hmRepository.updateJobStatus(updateJobStatusRequest);
+        return jobsRepository.updateJobStatus(updateJobStatusRequest);
     }
 
     @Override
@@ -80,7 +88,7 @@ public class HMServiceImpl implements IHMService {
 
             LevelStatus levelStatus = getNextLevelStatus(updateReferralStatusRequest.getCurrentLevel(), updateReferralStatusRequest.getStatus());
 
-            hmRepository.updateReferralStatus(levelStatus, updateReferralStatusRequest, referralStatusReasons);
+            referralsRepository.updateReferralStatus(levelStatus, updateReferralStatusRequest, referralStatusReasons);
 
             return new UpdateReferralStatusResponse(levelStatus.getNextLevel(), "SUCCESS", true);
         } catch (Exception e) {

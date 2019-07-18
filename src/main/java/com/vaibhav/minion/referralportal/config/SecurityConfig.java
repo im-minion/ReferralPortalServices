@@ -6,10 +6,12 @@ import com.vaibhav.minion.referralportal.security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -50,6 +52,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+                .antMatchers(HttpMethod.OPTIONS, "/**")
+                .antMatchers("/v2/api-docs",
+                        "/configuration/ui",
+                        "/swagger-resources",
+                        "/configuration/security",
+                        "/swagger-ui.html",
+                        "/webjars/**");
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .cors()
@@ -77,16 +91,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
 
                 .antMatchers("/rp/employee/**")
-                .hasAuthority("EMPLOYEE")
+                .hasAnyAuthority("EMPLOYEE", "HM", "HR")
 
-                .antMatchers("/rp/hm/**", "/rp/employee/**")
+                .antMatchers("/rp/hm/**")
                 .hasAuthority("HM")
 
-                .antMatchers("/rp/hr/**", "/rp/employee/**")
+                .antMatchers("/rp/hr/**")
                 .hasAuthority("HR")
 
                 .antMatchers("/rp/admin/**")
                 .hasAuthority("ADMIN")
+
+                .antMatchers("/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**")
+                .permitAll()
+                .and()
+                .authorizeRequests()
 
                 .anyRequest()
                 .authenticated();

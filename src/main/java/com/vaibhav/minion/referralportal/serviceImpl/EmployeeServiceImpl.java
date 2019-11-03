@@ -26,6 +26,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @Autowired
     private ReferralsRepository referralsRepository;
+
     @Override
     public List<JOBS> getAllOpenJobs() {
         return jobsRepository.getAllOpenJobs();

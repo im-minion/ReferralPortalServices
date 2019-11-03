@@ -58,13 +58,13 @@ public class ReferralPortalController {
         return ResponseEntity.ok().body(insertJobResponse);
     }
 
-    @GetMapping(value = "/hm/getOpenJob", consumes = "application/json", produces = "application/json")
+    @GetMapping(value = "/hm/getOpenJob", produces = "application/json")
     public ResponseEntity<List<JOBS>> getOpenJobs(@RequestParam("employeeId") String employeeId) {
         List<JOBS> openJobsList = hmService.getAllJobsForHm(employeeId);
         return ResponseEntity.ok().body(openJobsList);
     }
 
-    @GetMapping(value = "/hm/getReferrals", consumes = "application/json", produces = "application/json")
+    @GetMapping(value = "/hm/getReferrals", produces = "application/json")
     public ResponseEntity<List<REFERRALS>> getReferrals(@RequestParam("jobId") Double jobId) {
         List<REFERRALS> referralsList = hmService.getReferralsFromJobId(jobId);
         return ResponseEntity.ok().body(referralsList);
@@ -91,19 +91,19 @@ public class ReferralPortalController {
 
     /*********************************************_EMPLOYEE_***********************************************************/
 
-    @GetMapping(value = "/employee/getOpenJob", consumes = "application/json", produces = "application/json")
+    @GetMapping(value = "/employee/getOpenJob", produces = "application/json")
     public ResponseEntity<List<JOBS>> getOpenAllJobs() {
         List<JOBS> openJobsList = employeeService.getAllOpenJobs();
         return ResponseEntity.ok().body(openJobsList);
     }
 
-    @PostMapping(value = "/employee/addReferral", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/employee/addReferral", produces = "application/json")
     public ResponseEntity<AddReferralResponse> addReferral(@RequestParam("file") String resume, @RequestBody AddReferralRequest addReferralRequest) {
         AddReferralResponse referralResponse = employeeService.addReferral(resume, addReferralRequest);
         return ResponseEntity.ok().body(referralResponse);
     }
 
-    @GetMapping(value = "/employee/getReferralsByEmployeeId", consumes = "application/json", produces = "application/json")
+    @GetMapping(value = "/employee/getReferralsByEmployeeId", produces = "application/json")
     public ResponseEntity<List<REFERRALS>> getReferrals(@RequestParam("employeeId") String employeeId) {
         List<REFERRALS> employeeList = employeeService.getReferralsOfEmployeeId(employeeId);
         return ResponseEntity.ok().body(employeeList);

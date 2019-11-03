@@ -98,7 +98,7 @@ public class ReferralPortalController {
     }
 
     @PostMapping(value = "/employee/addReferral", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<AddReferralResponse> addReferal(@RequestParam("file") String resume, @RequestBody AddReferralRequest addReferralRequest) {
+    public ResponseEntity<AddReferralResponse> addReferral(@RequestParam("file") String resume, @RequestBody AddReferralRequest addReferralRequest) {
         AddReferralResponse referralResponse = employeeService.addReferral(resume, addReferralRequest);
         return ResponseEntity.ok().body(referralResponse);
     }

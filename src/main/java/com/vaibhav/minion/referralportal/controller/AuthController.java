@@ -38,7 +38,8 @@ public class AuthController {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = tokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+        String employeeRole = authService.getEmployeeRoleFromID(tokenProvider.getUserIdFromJWT(jwt).toString());
+        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, employeeRole));
     }
 
     @PostMapping(value = "/register", consumes = "application/json", produces = "application/json")

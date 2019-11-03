@@ -60,4 +60,9 @@ public class AuthServiceImpl implements IAuthService {
         }
         return registerReposne;
     }
+
+    @Override
+    public String getEmployeeRoleFromID(String userIdFromJWT) {
+        return employeeRepository.findById(userIdFromJWT).getEmployeeRole();
+    }
 }

@@ -7,7 +7,9 @@ import com.vaibhav.minion.referralportal.utility.RegisterRequest;
 
 public interface IAuthService {
 
-    public LoginResponse loginUser(LoginRequest loginRequest); //GET
+    LoginResponse loginUser(LoginRequest loginRequest); //GET
 
-    public RegisterReposne registerUser(RegisterRequest registerRequest); //POST
+    RegisterReposne registerUser(RegisterRequest registerRequest); //POST
+
+    String getEmployeeRoleFromID(String userIdFromJWT);
 }

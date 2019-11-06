@@ -1,5 +1,6 @@
 package com.vaibhav.minion.referralportal.controller;
 
+import com.google.gson.Gson;
 import com.vaibhav.minion.referralportal.model.JOBS;
 import com.vaibhav.minion.referralportal.model.REFERRALS;
 import com.vaibhav.minion.referralportal.service.IAdminService;
@@ -10,8 +11,15 @@ import com.vaibhav.minion.referralportal.utility.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+
+import static org.apache.tomcat.util.http.fileupload.IOUtils.copy;
+
 
 @RestController
 @RequestMapping(path = "/rp")
@@ -97,9 +105,11 @@ public class ReferralPortalController {
         return ResponseEntity.ok().body(openJobsList);
     }
 
-    @PostMapping(value = "/employee/addReferral", produces = "application/json")
-    public ResponseEntity<AddReferralResponse> addReferral(@RequestParam("file") String resume, @RequestBody AddReferralRequest addReferralRequest) {
-        AddReferralResponse referralResponse = employeeService.addReferral(resume, addReferralRequest);
+    @PostMapping(value = "/employee/addReferral")
+    public ResponseEntity<AddReferralResponse> addReferral(@RequestParam final MultipartFile file, @RequestParam("myjson") String json) {
+        Gson gson = new Gson();
+        AddReferralRequest addReferralRequest = gson.fromJson(json, AddReferralRequest.class);
+        AddReferralResponse referralResponse = employeeService.addReferral(file, addReferralRequest);
         return ResponseEntity.ok().body(referralResponse);
     }
 
@@ -135,5 +145,21 @@ public class ReferralPortalController {
     public ResponseEntity<ChangeRoleResponse> changeEmployeeRole(@RequestBody ChangeRoleRequest changeRoleRequest) {
         ChangeRoleResponse changeRoleResponse = adminService.changeEmployeeRole(changeRoleRequest);
         return ResponseEntity.ok().body(changeRoleResponse);
+    }
+
+    /*****************************************_GET_FILE_BY_FILE_ID**********************************************************/
+    @GetMapping(value = "/employee/getFileById", produces = "application/pdf")
+    public ResponseEntity<?> getFileById(@RequestParam String fileId, HttpServletResponse response) {
+        InputStream inputStream = null;
+        try {
+            inputStream = employeeService.getFileByID(fileId).getInputStream();
+            response.setContentType("application/pdf");
+            copy(inputStream, response.getOutputStream());
+            response.flushBuffer();
+            return ResponseEntity.ok().body(null);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(null);
+        }
     }
 }

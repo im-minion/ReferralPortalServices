@@ -23,6 +23,7 @@ public class REFERRALS {
     private String primarySkill;
     private String secondarySkill;
     private Binary resume;
+    private String resumeV2;
     private String referralCurrentLevel = "RESUME_SCREENING";
     private String referralCurrentStatus = "PENDING";
 //    will be pending by default but once referral processed it will be  ACCEPTED or REJECTED
@@ -111,6 +112,14 @@ public class REFERRALS {
 
     public Binary getResume() {
         return resume;
+    }
+
+    public String getResumeV2() {
+        return resumeV2;
+    }
+
+    public void setResumeV2(String resumeV2) {
+        this.resumeV2 = resumeV2;
     }
 
     public void setResume(Binary resume) {

@@ -27,8 +27,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 @Service
@@ -83,6 +85,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
                     Date date = new Date();
                     String fileId = gridFsOperations.store(inputStream, addReferralRequest.getReferralName() + date.getTime(), "application/pdf", metaData).toString();
                     referrals.setResumeV2(fileId);
+                } else {
+                    throw new FileNotFoundException();
                 }
                 referrals.setReferredBy(addReferralRequest.getReferredBy());
 

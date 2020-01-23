@@ -4,11 +4,9 @@ package com.vaibhav.minion.referralportal.security;
 public class JwtAuthenticationResponse {
     private String accessToken;
     private String tokenType = "Bearer";
-    private String employeeRole;
 
-    public JwtAuthenticationResponse(String accessToken, String employeeRole) {
+    public JwtAuthenticationResponse(String accessToken) {
         this.accessToken = accessToken;
-        this.employeeRole = employeeRole;
     }
 
     public String getAccessToken() {
@@ -25,13 +23,5 @@ public class JwtAuthenticationResponse {
 
     public void setTokenType(String tokenType) {
         this.tokenType = tokenType;
-    }
-
-    public String getEmployeeRole() {
-        return employeeRole;
-    }
-
-    public void setEmployeeRole(String employeeRole) {
-        this.employeeRole = employeeRole;
     }
 }

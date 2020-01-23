@@ -10,6 +10,4 @@ public interface IAuthService {
     LoginResponse loginUser(LoginRequest loginRequest); //GET
 
     RegisterReposne registerUser(RegisterRequest registerRequest); //POST
-
-    String getEmployeeRoleFromID(String userIdFromJWT);
 }

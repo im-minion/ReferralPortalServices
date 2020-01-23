@@ -105,7 +105,7 @@ public class EmployeeRepository {
         return mongoTemplate.insert(employee, EMPLOYEE_COLLECTION);
     }
 
-    public EMPLOYEE findByUsernameOrEmail(String usernameOrEmail, String employeeId) {
+    public EMPLOYEE findByUsernameOrEmail(String employeeId) {
         Criteria loginEmployeeIdCriteria = new Criteria("employeeId").is(employeeId);
         Query query = new Query();
         query.addCriteria(loginEmployeeIdCriteria);

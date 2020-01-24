@@ -2,6 +2,7 @@ package com.vaibhav.minion.referralportal.controller;
 
 import com.vaibhav.minion.referralportal.security.JwtAuthenticationResponse;
 import com.vaibhav.minion.referralportal.security.JwtTokenProvider;
+import com.vaibhav.minion.referralportal.security.UserPrincipal;
 import com.vaibhav.minion.referralportal.service.IAuthService;
 import com.vaibhav.minion.referralportal.utility.LoginRequest;
 import com.vaibhav.minion.referralportal.utility.RegisterReposne;
@@ -13,6 +14,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/rp/auth")
@@ -38,7 +42,8 @@ public class AuthController {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = tokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt,tokenProvider.getUserIdFromJWT(jwt),userPrincipal.getEmployeeRole()));
     }
 
     @PostMapping(value = "/register", consumes = "application/json", produces = "application/json")

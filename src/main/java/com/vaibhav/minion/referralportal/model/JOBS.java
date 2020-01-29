@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class JOBS {
     @Id
     private String id;
-    private long jobId;
+    private String jobId;
     private String jobTitle;
     private String jobDescription;
     private String yeo;
@@ -22,11 +22,11 @@ public class JOBS {
         return id;
     }
 
-    public long getJobId() {
+    public String getJobId() {
         return jobId;
     }
 
-    public void setJobId(long jobId) {
+    public void setJobId(String jobId) {
         this.jobId = jobId;
     }
 

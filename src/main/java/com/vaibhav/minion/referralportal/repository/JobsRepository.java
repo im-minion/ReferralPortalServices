@@ -33,7 +33,7 @@ public class JobsRepository {
         mongoTemplate.insert(jobs, JOBS_COLLECTION);
     }
 
-    public boolean isJobIdExists(long jobId) {
+    public boolean isJobIdExists(String jobId) {
         Criteria insertJobCriteria = new Criteria("jobId").is(jobId);
         Query query = new Query();
         query.addCriteria(insertJobCriteria);

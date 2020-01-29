@@ -18,4 +18,6 @@ public interface IEmployeeService {
     AddReferralResponse addReferral(MultipartFile file, AddReferralRequest addReferralRequest);
 
     InputStreamResource getFileByID(String fileId);
+
+    JOBS getJobByJobId(String jobId);
 }

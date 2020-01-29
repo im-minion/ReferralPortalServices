@@ -113,4 +113,9 @@ public class EmployeeServiceImpl implements IEmployeeService {
         }
         return null;
     }
+
+    @Override
+    public JOBS getJobByJobId(String jobId) {
+        return jobsRepository.getJobByJobId(jobId);
+    }
 }

@@ -66,7 +66,7 @@ public class ReferralPortalController {
         return ResponseEntity.ok().body(insertJobResponse);
     }
 
-    @GetMapping(value = "/hm/getOpenJob", produces = "application/json")
+    @GetMapping(value = "/hm/getOpenJobs", produces = "application/json")
     public ResponseEntity<List<JOBS>> getOpenJobs(@RequestParam("employeeId") String employeeId) {
         List<JOBS> openJobsList = hmService.getAllJobsForHm(employeeId);
         return ResponseEntity.ok().body(openJobsList);
@@ -99,9 +99,15 @@ public class ReferralPortalController {
 
     /*********************************************_EMPLOYEE_***********************************************************/
 
-    @GetMapping(value = "/employee/getOpenJob", produces = "application/json")
+    @GetMapping(value = "/employee/getOpenJobs", produces = "application/json")
     public ResponseEntity<List<JOBS>> getOpenAllJobs() {
         List<JOBS> openJobsList = employeeService.getAllOpenJobs();
+        return ResponseEntity.ok().body(openJobsList);
+    }
+
+    @GetMapping(value = "/employee/getJobByJobId", produces = "application/json")
+    public ResponseEntity<JOBS> getJobByJobId(@RequestParam final String jobId) {
+        JOBS openJobsList = employeeService.getJobByJobId(jobId);
         return ResponseEntity.ok().body(openJobsList);
     }
 

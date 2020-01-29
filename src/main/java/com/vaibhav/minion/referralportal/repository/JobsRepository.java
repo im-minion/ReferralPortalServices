@@ -72,4 +72,12 @@ public class JobsRepository {
     public boolean getCurrentJobVisibility(Double jobId) {
         return Objects.requireNonNull(mongoTemplate.findOne(Query.query(new Criteria("jobId").is(jobId)), JOBS.class)).isJobVisibility();
     }
+
+    public JOBS getJobByJobId(String jobId) {
+        Criteria jobCriteria = new Criteria("jobId").is(jobId);
+        Query query = new Query();
+        query.addCriteria(jobCriteria);
+//        TODO: if not found what to do? Don't know will do once know this
+        return mongoTemplate.findOne(query, JOBS.class, JOBS_COLLECTION);
+    }
 }

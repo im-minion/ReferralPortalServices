@@ -13,8 +13,8 @@ public class JOBS {
     private String yeo;
     private String createdByEmployeeId;
     private String prefLocation;
-    private boolean jobVisibility = false;
-    private String jobStatus = "DEFAULT";
+    private boolean jobVisibility = false; //default value
+    private String jobStatus = "DEFAULT"; //default value
     private String primarySkill;
     private String secondarySkill;
 

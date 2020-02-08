@@ -83,7 +83,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
 //                TODO: HARDCODED THINK If WE CAN DO SOMETHING
                     metaData.put("type", "pdf");
                     Date date = new Date();
-                    String fileId = gridFsOperations.store(inputStream, addReferralRequest.getReferralName() + date.getTime(), "application/pdf", metaData).toString();
+                    String fileName = addReferralRequest.getReferralName().trim().replaceAll("\\s", "_") + date.getTime();
+                    String fileId = gridFsOperations.store(inputStream, fileName, "application/pdf", metaData).toString();
                     referrals.setResumeV2(fileId);
                 } else {
                     throw new FileNotFoundException();

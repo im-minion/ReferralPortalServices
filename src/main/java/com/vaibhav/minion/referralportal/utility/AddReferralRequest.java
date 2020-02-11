@@ -3,7 +3,7 @@ package com.vaibhav.minion.referralportal.utility;
 public class AddReferralRequest {
     private String referralEmailId;
     private String referralName;
-    private Double jobId;
+    private String jobId;
     private String referDate;
     private String panNumber;
     private String dob;
@@ -28,11 +28,11 @@ public class AddReferralRequest {
         this.referralName = referralName;
     }
 
-    public Double getJobId() {
+    public String getJobId() {
         return jobId;
     }
 
-    public void setJobId(Double jobId) {
+    public void setJobId(String jobId) {
         this.jobId = jobId;
     }
 

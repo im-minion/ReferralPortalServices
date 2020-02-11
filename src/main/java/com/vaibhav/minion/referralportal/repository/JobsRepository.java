@@ -64,12 +64,12 @@ public class JobsRepository {
             return new UpdateJobStatusResponse("Failed to update", "DEFAULT");
         }
     }
-    public void updateJobVisibility(Double jobId, boolean currentVisibility) {
+    public void updateJobVisibility(String jobId, boolean currentVisibility) {
 //        enhanced version of query
         mongoTemplate.updateFirst(Query.query(new Criteria("jobId").is(jobId)), new Update().set("jobVisibility", !currentVisibility), JOBS_COLLECTION);
     }
 
-    public boolean getCurrentJobVisibility(Double jobId) {
+    public boolean getCurrentJobVisibility(String jobId) {
         return Objects.requireNonNull(mongoTemplate.findOne(Query.query(new Criteria("jobId").is(jobId)), JOBS.class)).isJobVisibility();
     }
 

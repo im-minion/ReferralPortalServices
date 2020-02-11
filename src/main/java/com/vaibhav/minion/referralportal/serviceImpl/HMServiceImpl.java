@@ -57,12 +57,12 @@ public class HMServiceImpl implements IHMService {
     }
 
     @Override
-    public List<REFERRALS> getReferralsFromJobId(Double jobId) {
+    public List<REFERRALS> getReferralsFromJobId(String jobId) {
         return referralsRepository.getReferralsFromJobId(jobId);
     }
 
     @Override
-    public UpdateJobVisibilityResponse updateJobVisibility(Double jobId) {
+    public UpdateJobVisibilityResponse updateJobVisibility(String jobId) {
         try {
             boolean currentVisibility = jobsRepository.getCurrentJobVisibility(jobId);
             jobsRepository.updateJobVisibility(jobId, currentVisibility);

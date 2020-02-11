@@ -21,7 +21,7 @@ public class ReferralsRepository {
 
     private static final String REFERRALS_COLLECTION = "REFERRALS";
 
-    public List<REFERRALS> getReferralsFromJobId(Double jobId) {
+    public List<REFERRALS> getReferralsFromJobId(String jobId) {
         Criteria jobIdCriteria = new Criteria("jobId").is(jobId);
         Query query = new Query();
         query.addCriteria(jobIdCriteria);

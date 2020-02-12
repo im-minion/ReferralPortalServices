@@ -75,7 +75,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
                 referrals.setReferralName(addReferralRequest.getReferralName());
                 referrals.setPrimarySkill(addReferralRequest.getPrimarySkill());
                 referrals.setSecondarySkill(addReferralRequest.getSecondarySkill());
-                referrals.setResume(new Binary(BsonBinarySubType.BINARY, file.getBytes()));
+//                referrals.setResume(new Binary(BsonBinarySubType.BINARY, file.getBytes()));
                 DBObject metaData = new BasicDBObject();
 //                InputStream inputStream = new FileInputStream("C:\\Users\\vaibhav\\Documents\\Resume\\VaibhavMiniyar_Resume_v2.pdf");
                 if(file != null) {

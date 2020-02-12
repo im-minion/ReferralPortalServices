@@ -22,7 +22,8 @@ public class REFERRALS {
     private String yoe;
     private String primarySkill;
     private String secondarySkill;
-    private Binary resume;
+//    Deprecated
+//    private Binary resume;
     private String resumeV2;
     private String referralCurrentLevel = "RESUME_SCREENING";
     private String referralCurrentStatus = "PENDING";
@@ -110,9 +111,9 @@ public class REFERRALS {
         this.secondarySkill = secondarySkill;
     }
 
-    public Binary getResume() {
-        return resume;
-    }
+//    public Binary getResume() {
+//        return resume;
+//    }
 
     public String getResumeV2() {
         return resumeV2;
@@ -122,9 +123,9 @@ public class REFERRALS {
         this.resumeV2 = resumeV2;
     }
 
-    public void setResume(Binary resume) {
-        this.resume = resume;
-    }
+//    public void setResume(Binary resume) {
+//        this.resume = resume;
+//    }
 
     public String getReferralCurrentLevel() {
         return referralCurrentLevel;

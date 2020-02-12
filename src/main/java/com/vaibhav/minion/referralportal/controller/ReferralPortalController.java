@@ -68,7 +68,7 @@ public class ReferralPortalController {
 
     @GetMapping(value = "/hm/getOpenJobs", produces = "application/json")
     public ResponseEntity<List<JOBS>> getOpenJobs(@RequestParam("employeeId") String employeeId) {
-        List<JOBS> openJobsList = hmService.getAllJobsForHm(employeeId);
+        List<JOBS> openJobsList = hmService.getAllJobsCreatedByHm(employeeId);
         return ResponseEntity.ok().body(openJobsList);
     }
 

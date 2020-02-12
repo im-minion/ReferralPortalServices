@@ -41,17 +41,16 @@ public class JobsRepository {
         return job != null;
     }
 
-    public List<JOBS> getAllJobsForHm(String employeeId) {
+    public List<JOBS> getAllJobsCreatedByHm(String employeeId) {
         Criteria criteriaEmployeeId = new Criteria("createdByEmployeeId").is(employeeId);
-        Criteria criteriaJobVisibility = new Criteria("jobVisibility").is(true);
-        Criteria criteriaJobStatus = new Criteria("jobStatus").is("OPEN");
+//        Criteria criteriaJobVisibility = new Criteria("jobVisibility").is(true);
+//        Criteria criteriaJobStatus = new Criteria("jobStatus").is("OPEN");
         Query query = new Query();
-        query.addCriteria(criteriaEmployeeId).addCriteria(criteriaJobVisibility).addCriteria(criteriaJobStatus);
+        query.addCriteria(criteriaEmployeeId);//.addCriteria(criteriaJobVisibility).addCriteria(criteriaJobStatus);
         return mongoTemplate.find(query, JOBS.class, JOBS_COLLECTION);
     }
 
     public UpdateJobStatusResponse updateJobStatus(UpdateJobStatusRequest updateJobStatusRequest) {
-        UpdateJobStatusResponse updateJobStatusResponse;
         try {
             Update update = new Update();
             update.set("jobStatus", updateJobStatusRequest.getNewJobStatus());
@@ -64,6 +63,7 @@ public class JobsRepository {
             return new UpdateJobStatusResponse("Failed to update", "DEFAULT");
         }
     }
+
     public void updateJobVisibility(String jobId, boolean currentVisibility) {
 //        enhanced version of query
         mongoTemplate.updateFirst(Query.query(new Criteria("jobId").is(jobId)), new Update().set("jobVisibility", !currentVisibility), JOBS_COLLECTION);

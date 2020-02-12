@@ -11,7 +11,7 @@ public interface IHMService {
 
     public InsertJobResponse insertJob(InsertJobRequest insertJobRequest);
 
-    public List<JOBS> getAllJobsForHm(String employeeId);
+    public List<JOBS> getAllJobsCreatedByHm(String employeeId);
 
     public List<REFERRALS> getReferralsFromJobId(String jobId);
 

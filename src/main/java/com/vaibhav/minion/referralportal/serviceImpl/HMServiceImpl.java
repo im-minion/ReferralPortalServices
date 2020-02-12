@@ -52,8 +52,8 @@ public class HMServiceImpl implements IHMService {
 
 
     @Override
-    public List<JOBS> getAllJobsForHm(String employeeId) {
-        return jobsRepository.getAllJobsForHm(employeeId);
+    public List<JOBS> getAllJobsCreatedByHm(String employeeId) {
+        return jobsRepository.getAllJobsCreatedByHm(employeeId);
     }
 
     @Override

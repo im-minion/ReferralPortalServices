@@ -101,6 +101,11 @@ public class ReferralPortalController {
         return ResponseEntity.ok().body(updateReferralStatusResponse);
     }
 
+    @GetMapping(value = "/hm/getAllReferralsAtHM", produces = "application/json")
+    public ResponseEntity<List<REFERRALS>> getAllReferralsAtHm() {
+        //TODO : this is hr service convert
+        return getReferralsAtHr();
+    }
 
     /*********************************************_EMPLOYEE_***********************************************************/
 

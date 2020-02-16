@@ -1,6 +1,8 @@
 package com.vaibhav.minion.referralportal.repository;
 
+import com.mongodb.client.result.UpdateResult;
 import com.vaibhav.minion.referralportal.model.JOBS;
+import com.vaibhav.minion.referralportal.utility.UpdateJobRequest;
 import com.vaibhav.minion.referralportal.utility.UpdateJobStatusRequest;
 import com.vaibhav.minion.referralportal.utility.UpdateJobStatusResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,5 +81,17 @@ public class JobsRepository {
         query.addCriteria(jobCriteria);
 //        TODO: if not found what to do? Don't know will do once know this
         return mongoTemplate.findOne(query, JOBS.class, JOBS_COLLECTION);
+    }
+
+    public boolean update(UpdateJobRequest updateJobRequest) {
+        Update update = new Update();
+        update.set("jobStatus", updateJobRequest.getJobStatus());
+        update.set("jobVisibility", updateJobRequest.isJobVisibility());
+        update.set("jobDescription", updateJobRequest.getJobDescription());
+        Criteria jobIdCriteria = new Criteria("jobId").is(updateJobRequest.getJobId());
+        Query query = new Query();
+        query.addCriteria(jobIdCriteria);
+        UpdateResult u = mongoTemplate.updateFirst(query, update, JOBS.class, JOBS_COLLECTION);
+        return u.wasAcknowledged();
     }
 }

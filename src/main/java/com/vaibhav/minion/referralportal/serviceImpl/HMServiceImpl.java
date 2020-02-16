@@ -97,6 +97,11 @@ public class HMServiceImpl implements IHMService {
 
     }
 
+    @Override
+    public boolean updateJob(UpdateJobRequest updateJobRequest) {
+        return jobsRepository.update(updateJobRequest);
+    }
+
 
     private LevelStatus getNextLevelStatus(String currentLevel, String status) {
         LevelStatus levelStatus = new LevelStatus();

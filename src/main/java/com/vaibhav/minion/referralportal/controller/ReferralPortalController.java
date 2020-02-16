@@ -90,6 +90,11 @@ public class ReferralPortalController {
         return ResponseEntity.ok().body(updateJobStatusResponse);
     }
 
+    @PutMapping(value = "/hm/updateJob")
+    public ResponseEntity<?> updateJob(@RequestBody UpdateJobRequest updateJobRequest){
+        return ResponseEntity.ok().body(hmService.updateJob(updateJobRequest));
+    }
+
     @PostMapping(value = "/hm/updateReferralsStatus", consumes = "application/json", produces = "application/json")
     public ResponseEntity<UpdateReferralStatusResponse> updateReferralStatus(@RequestBody UpdateReferralStatusRequest updateReferralStatusRequest) {
         UpdateReferralStatusResponse updateReferralStatusResponse = hmService.updateReferralStatus(updateReferralStatusRequest);

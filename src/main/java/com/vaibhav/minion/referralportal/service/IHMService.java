@@ -20,4 +20,6 @@ public interface IHMService {
     public UpdateJobStatusResponse updateJobStatus(UpdateJobStatusRequest updateJobStatusRequest);
 
     public UpdateReferralStatusResponse updateReferralStatus(UpdateReferralStatusRequest updateReferralStatusRequest);
+
+    public boolean updateJob(UpdateJobRequest updateJobRequest);
 }

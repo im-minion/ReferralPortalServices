@@ -78,17 +78,17 @@ public class ReferralPortalController {
         return ResponseEntity.ok().body(referralsList);
     }
 
-    @GetMapping(value = "/hm/updateJobVisibility", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<UpdateJobVisibilityResponse> updateJobVisibility(@RequestParam("jobId") String jobId) {
-        UpdateJobVisibilityResponse updateJobVisibilityResponse = hmService.updateJobVisibility(jobId);
-        return ResponseEntity.ok().body(updateJobVisibilityResponse);
-    }
-
-    @PostMapping(value = "/hm/updateJobStatus", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<UpdateJobStatusResponse> updateJobStatus(@RequestBody UpdateJobStatusRequest updateJobStatusRequest) {
-        UpdateJobStatusResponse updateJobStatusResponse = hmService.updateJobStatus(updateJobStatusRequest);
-        return ResponseEntity.ok().body(updateJobStatusResponse);
-    }
+//    @GetMapping(value = "/hm/updateJobVisibility", consumes = "application/json", produces = "application/json")
+//    public ResponseEntity<UpdateJobVisibilityResponse> updateJobVisibility(@RequestParam("jobId") String jobId) {
+//        UpdateJobVisibilityResponse updateJobVisibilityResponse = hmService.updateJobVisibility(jobId);
+//        return ResponseEntity.ok().body(updateJobVisibilityResponse);
+//    }
+//
+//    @PostMapping(value = "/hm/updateJobStatus", consumes = "application/json", produces = "application/json")
+//    public ResponseEntity<UpdateJobStatusResponse> updateJobStatus(@RequestBody UpdateJobStatusRequest updateJobStatusRequest) {
+//        UpdateJobStatusResponse updateJobStatusResponse = hmService.updateJobStatus(updateJobStatusRequest);
+//        return ResponseEntity.ok().body(updateJobStatusResponse);
+//    }
 
     @PutMapping(value = "/hm/updateJob")
     public ResponseEntity<?> updateJob(@RequestBody UpdateJobRequest updateJobRequest){

@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class ReferralsRepository {
@@ -25,7 +26,9 @@ public class ReferralsRepository {
         Criteria jobIdCriteria = new Criteria("jobId").is(jobId);
         Query query = new Query();
         query.addCriteria(jobIdCriteria);
-        return mongoTemplate.find(query, REFERRALS.class, REFERRALS_COLLECTION);
+        List<REFERRALS> referrals = mongoTemplate.find(query, REFERRALS.class, REFERRALS_COLLECTION);;
+        referrals = referrals.stream().filter(referrals1 -> !referrals1.getReferralCurrentLevel().equals("HR")).collect(Collectors.toList());
+        return referrals;
     }
 
     public void updateReferralStatus(LevelStatus levelStatus, UpdateReferralStatusRequest updateReferralStatusRequest, ReferralStatusReasons referralStatusReasons) {

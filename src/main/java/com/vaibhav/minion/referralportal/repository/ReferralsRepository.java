@@ -26,8 +26,8 @@ public class ReferralsRepository {
         Criteria jobIdCriteria = new Criteria("jobId").is(jobId);
         Query query = new Query();
         query.addCriteria(jobIdCriteria);
-        List<REFERRALS> referrals = mongoTemplate.find(query, REFERRALS.class, REFERRALS_COLLECTION);;
-        referrals = referrals.stream().filter(referrals1 -> !referrals1.getReferralCurrentLevel().equals("HR")).collect(Collectors.toList());
+        List<REFERRALS> referrals = mongoTemplate.find(query, REFERRALS.class, REFERRALS_COLLECTION);
+//        referrals = referrals.stream().filter(referrals1 -> !referrals1.getReferralCurrentLevel().equals("HR")).collect(Collectors.toList());
         return referrals;
     }
 

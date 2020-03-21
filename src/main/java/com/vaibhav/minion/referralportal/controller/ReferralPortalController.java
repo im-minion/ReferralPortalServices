@@ -180,8 +180,8 @@ public class ReferralPortalController {
     }
 
     @GetMapping(value = "/employee/getAnalyticalInfo", produces = "application/json")
-    public ResponseEntity<?> getAnalyticalInfo(@RequestParam final String employeeId, @RequestParam final String role) {
-        AnalyticalInfoResponse analyticalInfoResponse = employeeService.getAnalyticalInfo(employeeId, role);
+    public ResponseEntity<?> getAnalyticalInfo(@RequestParam final String employeeId, @RequestParam final String employeeRole) {
+        AnalyticalInfoResponse analyticalInfoResponse = employeeService.getAnalyticalInfo(employeeId, employeeRole);
         return ResponseEntity.ok().body(analyticalInfoResponse);
     }
 }

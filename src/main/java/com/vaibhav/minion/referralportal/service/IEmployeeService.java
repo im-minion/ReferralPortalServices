@@ -4,6 +4,7 @@ import com.vaibhav.minion.referralportal.model.JOBS;
 import com.vaibhav.minion.referralportal.model.REFERRALS;
 import com.vaibhav.minion.referralportal.utility.AddReferralRequest;
 import com.vaibhav.minion.referralportal.utility.AddReferralResponse;
+import com.vaibhav.minion.referralportal.utility.AnalyticalInfoResponse;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,4 +21,6 @@ public interface IEmployeeService {
     InputStreamResource getFileByID(String fileId);
 
     JOBS getJobByJobId(String jobId);
+
+    AnalyticalInfoResponse getAnalyticalInfo(String employeeId, String role);
 }

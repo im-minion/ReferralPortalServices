@@ -1,6 +1,7 @@
 package com.vaibhav.minion.referralportal.repository;
 
 import com.vaibhav.minion.referralportal.model.REFERRALS;
+import com.vaibhav.minion.referralportal.utility.EmployeeAnalyticalInfo;
 import com.vaibhav.minion.referralportal.utility.LevelStatus;
 import com.vaibhav.minion.referralportal.utility.ReferralStatusReasons;
 import com.vaibhav.minion.referralportal.utility.UpdateReferralStatusRequest;
@@ -72,5 +73,21 @@ public class ReferralsRepository {
 
     public List<REFERRALS> getAllReferralsForHr() {
         return mongoTemplate.findAll(REFERRALS.class, REFERRALS_COLLECTION);
+    }
+
+    public EmployeeAnalyticalInfo getReferralsCountFromEmployeeID(String employeeId) {
+        EmployeeAnalyticalInfo employeeAnalyticalInfo = new EmployeeAnalyticalInfo();
+
+        List<REFERRALS> referralsList = getReferralsOfEmployeeId(employeeId);
+        int hiredCount = (int) referralsList.stream().filter(referrals -> referrals.getReferralCurrentLevel().equals("HR") && referrals.getReferralCurrentStatus().equals("ACCEPTED")).count();
+        int rejectedCount = (int) referralsList.stream().filter(referrals -> referrals.getReferralCurrentStatus().equals("REJECTED")).count();
+        int pendingCount = (int) referralsList.stream().filter(referrals -> referrals.getReferralCurrentStatus().equals("PENDING")).count();
+
+        employeeAnalyticalInfo.setAllReferralsCount(referralsList.size());
+        employeeAnalyticalInfo.setHiredReferralsCount(hiredCount);
+        employeeAnalyticalInfo.setRejectedReferralsCount(rejectedCount);
+        employeeAnalyticalInfo.setPendingReferralsCount(pendingCount);
+
+        return employeeAnalyticalInfo;
     }
 }

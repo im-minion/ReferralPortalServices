@@ -178,4 +178,10 @@ public class ReferralPortalController {
             return ResponseEntity.badRequest().body(null);
         }
     }
+
+    @GetMapping(value = "/employee/getAnalyticalInfo", produces = "application/json")
+    public ResponseEntity<?> getAnalyticalInfo(@RequestParam final String employeeId, @RequestParam final String role) {
+        AnalyticalInfoResponse analyticalInfoResponse = employeeService.getAnalyticalInfo(employeeId, role);
+        return ResponseEntity.ok().body(analyticalInfoResponse);
+    }
 }

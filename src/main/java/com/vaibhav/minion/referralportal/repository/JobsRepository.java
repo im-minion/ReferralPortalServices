@@ -94,4 +94,9 @@ public class JobsRepository {
         UpdateResult u = mongoTemplate.updateFirst(query, update, JOBS.class, JOBS_COLLECTION);
         return u.wasAcknowledged();
     }
+
+    public long getAllJobsCount() {
+        return mongoTemplate.count(new Query(),JOBS_COLLECTION);
+
+    }
 }

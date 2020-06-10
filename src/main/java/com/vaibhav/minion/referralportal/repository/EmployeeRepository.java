@@ -27,42 +27,10 @@ public class EmployeeRepository {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-//    private static final String REFERRALS_COLLECTION = "REFERRALS";
-
     private static final String EMPLOYEE_COLLECTION = "EMPLOYEE";
 
     private static final String DEFAULT_ROLE = "EMPLOYEE";
 
-//    private static final String JOBS_COLLECTION = "JOBS";
-
-//    public List<JOBS> getAllOpenJobs() {
-//        Criteria criteriaJobVisibility = new Criteria("jobVisibility").is(true);
-//        Criteria criteriaJobStatus = new Criteria("jobStatus").is("OPEN");
-//        Query query = new Query();
-//        query.addCriteria(criteriaJobVisibility).addCriteria(criteriaJobStatus);
-//        return mongoTemplate.find(query, JOBS.class, JOBS_COLLECTION);
-//    }
-
-//    public List<REFERRALS> getReferralsOfEmployeeId(String employeeId) {
-//        Query query = new Query();
-//        Criteria referredByCriteria = new Criteria("referredBy").is(employeeId);
-//        query.addCriteria(referredByCriteria);
-//        return mongoTemplate.find(query, REFERRALS.class, REFERRALS_COLLECTION);
-//    }
-
-//    public REFERRALS addReferral(REFERRALS referrals) {
-//        return mongoTemplate.insert(referrals, REFERRALS_COLLECTION);
-//    }
-
-//    public boolean isReferralEmailIdExists(String referralEmailId) {
-//        Criteria emailIdCriteria = new Criteria("referralEmailId").is(referralEmailId);
-//        Query query = new Query();
-//        query.addCriteria(emailIdCriteria);
-//        REFERRALS referral = mongoTemplate.findOne(query, REFERRALS.class, REFERRALS_COLLECTION);
-//        return referral != null;
-//    }
-
-    // **********
     public ChangeRoleResponse changeEmployeeRole(ChangeRoleRequest changeRoleRequest) {
         try {
             Update update = new Update();

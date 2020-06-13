@@ -1,6 +1,7 @@
 package com.vaibhav.minion.referralportal.controller;
 
 import com.google.gson.Gson;
+import com.vaibhav.minion.referralportal.model.EMPLOYEE;
 import com.vaibhav.minion.referralportal.model.JOBS;
 import com.vaibhav.minion.referralportal.model.REFERRALS;
 import com.vaibhav.minion.referralportal.service.IAdminService;
@@ -156,6 +157,12 @@ public class ReferralPortalController {
     }
 
     /*********************************************_ADMIN_***********************************************************/
+
+    @PostMapping(value = "/admin/getAllEmployees")
+    public ResponseEntity<List<EMPLOYEE>> getAllEmployees() {
+        List<EMPLOYEE> employees = adminService.getAllEmployees();
+        return ResponseEntity.ok().body(employees);
+    }
 
     @PostMapping(value = "/admin/changeRole")
     public ResponseEntity<ChangeRoleResponse> changeEmployeeRole(@RequestBody ChangeRoleRequest changeRoleRequest) {

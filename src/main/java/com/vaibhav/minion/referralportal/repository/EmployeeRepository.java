@@ -2,8 +2,6 @@ package com.vaibhav.minion.referralportal.repository;
 
 import com.mongodb.client.result.UpdateResult;
 import com.vaibhav.minion.referralportal.model.EMPLOYEE;
-import com.vaibhav.minion.referralportal.model.JOBS;
-import com.vaibhav.minion.referralportal.model.REFERRALS;
 import com.vaibhav.minion.referralportal.utility.ChangeRoleRequest;
 import com.vaibhav.minion.referralportal.utility.ChangeRoleResponse;
 import com.vaibhav.minion.referralportal.utility.LoginRequest;
@@ -85,5 +83,9 @@ public class EmployeeRepository {
         Query query = new Query();
         query.addCriteria(loginEmployeeIdCriteria);
         return mongoTemplate.findOne(query, EMPLOYEE.class, EMPLOYEE_COLLECTION);
+    }
+
+    public List<EMPLOYEE> getAllEmployees() {
+        return mongoTemplate.findAll(EMPLOYEE.class);
     }
 }

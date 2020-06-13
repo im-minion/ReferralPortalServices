@@ -158,7 +158,7 @@ public class ReferralPortalController {
 
     /*********************************************_ADMIN_***********************************************************/
 
-    @PostMapping(value = "/admin/getAllEmployees")
+    @GetMapping(value = "/admin/getAllEmployees")
     public ResponseEntity<List<EMPLOYEE>> getAllEmployees() {
         List<EMPLOYEE> employees = adminService.getAllEmployees();
         return ResponseEntity.ok().body(employees);

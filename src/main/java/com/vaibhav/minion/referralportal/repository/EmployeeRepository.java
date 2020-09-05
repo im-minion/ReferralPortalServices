@@ -47,14 +47,6 @@ public class EmployeeRepository {
         }
     }
 
-    public EMPLOYEE loginUser(LoginRequest loginRequest) {
-        Criteria loginEmployeeIdCriteria = new Criteria("employeeId").is(loginRequest.getEmployeeId());
-        Criteria loginPasswordCriteria = new Criteria("encryptedPassword").is(loginRequest.getPassword());
-        Query query = new Query();
-        query.addCriteria(loginEmployeeIdCriteria).addCriteria(loginPasswordCriteria);
-        return mongoTemplate.findOne(query, EMPLOYEE.class, EMPLOYEE_COLLECTION);
-    }
-
     public boolean checkIsEmployeeIdExists(String employeeId) {
         Criteria registerEmployeeIdCriteria = new Criteria("employeeId").is(employeeId);
         Query query = new Query();

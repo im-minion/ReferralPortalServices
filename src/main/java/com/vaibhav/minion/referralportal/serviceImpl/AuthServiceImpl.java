@@ -15,32 +15,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthServiceImpl implements IAuthService {
 
-//    @Autowired
-//    private AuthRepository authRepository;
-
     @Autowired
     private EmployeeRepository employeeRepository;
-
-    @Autowired
-    private JobsRepository jobsRepository;
-
-    @Autowired
-    private ReferralsRepository referralsRepository;
-
-
-    @Override
-    public LoginResponse loginUser(LoginRequest loginRequest) {
-        LoginResponse loginResponse;// = null;
-
-        EMPLOYEE employee = employeeRepository.loginUser(loginRequest);
-
-        if (employee != null) {
-            loginResponse = new LoginResponse(employee.getEmployeeId(), employee.getEmployeeRole(), "SUCCESS");
-        } else {
-            loginResponse = new LoginResponse(loginRequest.getEmployeeId(), null, "FAILED");
-        }
-        return loginResponse;
-    }
 
     @Override
     public RegisterReposne registerUser(RegisterRequest registerRequest) {
